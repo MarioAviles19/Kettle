@@ -8,18 +8,19 @@
         steps = [...steps, ""]
         console.log(steps);
     }
+    
 
 </script>
 
 
-<ul>
+<ul class="m-auto w-full max-w-[50rem]">
     <Draggable.Area bind:each={steps}>
         {#each steps as step, i}
     
         <Draggable.Item name={i.toString()} lockDrag>
             <li>
-                <h4>Step {i + 1}</h4>
-                <textarea class="border-2 border-black rounded" bind:value={steps[i]}></textarea>
+                <h4 class="font-bold text-lg">Step {i + 1}</h4>
+                <textarea placeholder="Enter info..." class="border-2 border-black rounded w-full min-h-[7rem]" bind:value={steps[i]}></textarea>
             </li>
         </Draggable.Item>
         {/each}
@@ -29,6 +30,5 @@
 
 </ul>
 <div>
-    
-    <button type="button" on:click={AddStep}><Plus/></button>
+    <button class="block m-auto bg-accent-1 rounded-full text-white" type="button" on:click={AddStep}><Plus size={30}/></button>
 </div>

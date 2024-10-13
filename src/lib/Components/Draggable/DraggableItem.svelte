@@ -8,7 +8,10 @@ export let name : string;
 export let lockDrag = false;
 
 setContext(handleKey, {
-    HandleDragEnter
+    HandleDragEnter,
+    GetParentSymbol,
+    RemoveParentItem
+
 })
 let symbol = Symbol(name);
 
@@ -20,6 +23,14 @@ const items : Array<any> = GetDragItems();
 const activeItem = ActiveDraggedItem() as Writable<any>
 
 let height = 20;
+
+function GetParentSymbol(){
+    return symbol;
+}
+function RemoveParentItem(){
+    let removeIndex = items.findIndex(el=>{return el.id ===symbol})
+    items.splice(removeIndex, 1);
+}
 
 function HandleDragEnter(e : PointerEvent | any){
     if(!e.target || lockDrag){
@@ -60,10 +71,10 @@ items.push({id: symbol, data : {}})
     {/if}
     
 
-    {#if $activeItem?.id !== symbol}
-        <div >
+    
+        <div class={$activeItem?.id == symbol? "hidden" : ""}>
             <slot/>
         </div>
-    {/if}
+    
 
 </div>

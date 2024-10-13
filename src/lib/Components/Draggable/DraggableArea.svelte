@@ -4,6 +4,7 @@
     import { onDestroy, setContext } from "svelte";
     import { key } from ".";
     import { writable } from "svelte/store";
+	import DraggableItemBuffer from "./DraggableItemBuffer.svelte";
 
     //TODO: allow use of component outside of each loop
 
@@ -69,6 +70,8 @@
 <div role="list" on:pointermove={CaptureMouseMovement} on:pointerdown={CaptureMouseMovement} on:pointerup={DragEnd}  class="p-1 touch-none" >
 
     <slot/>
+
+    <DraggableItemBuffer class="min-h-[1.25rem]" />
 
     {#if $activeItem}
     <div class="{$activeItem? "block" : "hidden"} bg-white fixed pointer-events-none border-2 border-black rounded-md font-bold px-2" style="top:{mouseY}px; left:{mouseX}px">

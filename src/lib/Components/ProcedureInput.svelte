@@ -1,14 +1,30 @@
 <script lang=ts>
     import { Draggable } from "./Draggable";
-    import {Plus} from "lucide-svelte"
+    import {Plus, X} from "lucide-svelte"
 
     export let steps : Array<string> = [""];
+    let focusedIndex = -1;
+    
+    let stepInputElements : Array<HTMLTextAreaElement> = [];
+    let focusFlag = false;
 
     function AddStep(){
         steps = [...steps, ""]
-        console.log(steps);
+        focusFlag = true;
+
     }
-    
+    function FocusLastElement(arr : Array<HTMLTextAreaElement>){
+        if(arr.length > 0 && focusFlag){
+            arr[arr.length - 1].focus()
+            focusFlag = false;
+        }
+    }
+    function SetFocusState(index : number){
+        focusedIndex = index
+        
+    }
+
+    $: FocusLastElement(stepInputElements);
 
 </script>
 
@@ -19,8 +35,15 @@
     
         <Draggable.Item name={i.toString()} lockDrag>
             <li>
-                <h4 class="font-bold text-lg">Step {i + 1}</h4>
-                <textarea placeholder="Enter info..." class="border-2 border-black rounded w-full min-h-[7rem]" bind:value={steps[i]}></textarea>
+                <div class="flex justify-between">
+                    <h4 class="font-bold text-lg ">Step {i + 1}</h4>
+                   
+                        <Draggable.RemoveButton class={focusedIndex !== i || i === 0? "hidden" : ""}>
+                            <X/>
+                        </Draggable.RemoveButton>
+              
+                </div>
+                <textarea on:focusin={()=>{SetFocusState(i)}} on:focusout={()=>{}} bind:this={stepInputElements[i]} placeholder="Enter info..." class="border-2 border-black rounded w-full min-h-[7rem]" bind:value={steps[i]}></textarea>
             </li>
         </Draggable.Item>
         {/each}

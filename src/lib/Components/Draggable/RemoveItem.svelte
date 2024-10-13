@@ -5,8 +5,10 @@ import { getContext } from "svelte";
 const {RemoveParentItem} = getContext(handleKey) as any
 
 
+console.log(getContext(handleKey))
+
 </script>
 
-<button type="button" on:click={RemoveParentItem}>
+<button {...$$restProps} type="button" on:click|preventDefault={RemoveParentItem}>
     <slot/>
 </button>

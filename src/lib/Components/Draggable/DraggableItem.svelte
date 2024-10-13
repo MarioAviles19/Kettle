@@ -4,6 +4,7 @@ import {scale} from "svelte/transition"
 import { key, handleKey} from ".";
 import type { Writable } from "svelte/store";
 
+
 export let name : string;
 export let lockDrag = false;
 
@@ -15,7 +16,7 @@ setContext(handleKey, {
 })
 let symbol = Symbol(name);
 
-const {GetDragItems, ActiveDraggedItem, DropItem} = getContext<any>(key)
+const {GetDragItems, ActiveDraggedItem, DropItem, RemoveItem} = getContext<any>(key)
 
 
 
@@ -29,7 +30,8 @@ function GetParentSymbol(){
 }
 function RemoveParentItem(){
     let removeIndex = items.findIndex(el=>{return el.id ===symbol})
-    items.splice(removeIndex, 1);
+    RemoveItem(removeIndex)
+  
 }
 
 function HandleDragEnter(e : PointerEvent | any){

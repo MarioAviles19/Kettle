@@ -35,6 +35,6 @@
 </ul>
 
 <form on:submit|preventDefault class="flex items-center justify-start p-1 gap-2">
-    <input class="outline-slate-700 outline-3 outline" bind:this={input} bind:value={inputValue} placeholder="Ingredients..." type="text">
-    <button class="rounded border-2 border-black py-1 px-2" on:click={AddIngredient} type="submit">Add</button>
+    <input class="border-2 border-black rounded px-1" bind:this={input} bind:value={inputValue} placeholder="Ingredients..." type="text">
+    <button class="rounded-md border-2 text-white bg-accent-1 px-2" on:click={AddIngredient} type="submit">Add</button>
 </form>

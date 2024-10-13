@@ -36,12 +36,18 @@
     setContext(key, {
         GetDragItems : ()=> dragItems,
         ActiveDraggedItem : GetCurrentDraggedItem,
-        DropItem
+        DropItem,
+        RemoveItem
 
     })
 
 
-
+    function RemoveItem(index : number){
+        each.splice(index, 1);
+        each = each;
+        console.log(index);
+        console.log(each);
+    }
  
     onDestroy(()=>{
         dragItems = [];

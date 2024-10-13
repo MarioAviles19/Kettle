@@ -20,9 +20,9 @@
 </script>
 
 
-<div class="composeStep">
+<div class="composeStep p-1">
     
-    <h3>Ingredients</h3>
+    <h3 class="text-xl font-bold">Ingredients</h3>
 
     <IngredientsInput/>
     
@@ -35,4 +35,14 @@
     <ProcedureInput/>
 
 </div>
+
+<div class="composeStep p-1">
+    <h3 class="font-bold text-xl">Notes</h3>
+
+    <textarea  placeholder="Enter note..." class="border-2 border-black rounded w-full min-h-[7rem]"></textarea>
+
+
+</div>
+
+<button class="bg-accent-1 text-white rounded-md m-auto p-1 block">Submit</button>
 

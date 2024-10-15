@@ -4,10 +4,11 @@
 
 :root{
 
-    --color-accent-color-1 : rgb(255, 152, 43);
+    --color-accent-1 : rgb(255, 152, 43);
+    --color-subtle-light : rgba(104, 104, 104, 0.499);
 }
 
 ::selection {
-    background: var(--color-accent-color-1);
+    background: var(--color-accent-1);
     color: white;
   }

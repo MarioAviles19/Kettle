@@ -1,13 +1,14 @@
 <script lang=ts>
     import { getContext } from "svelte";
-    import { pageKey } from ".";
+    import { key } from ".";
 
-    const {SetSelfActive} = getContext(pageKey) as any
+    export let pageNum : number;
+    const {SetPage} = getContext(key) as any
 
-
+    
 
 </script>
 
-<button type="button" on:click={SetSelfActive}>
+<button type="button" on:click={()=>{SetPage(pageNum)}}>
     <slot/>
 </button>

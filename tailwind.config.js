@@ -5,7 +5,8 @@ export default {
 
     extend: {
       colors:{
-        'accent-1' : 'orange'
+        'accent-1' : 'var(--color-accent-1)',
+        'subtle-light' : "var(--color-subtle-light)"
       },
       
     },

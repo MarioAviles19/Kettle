@@ -4,7 +4,7 @@
 	import { writable } from "svelte/store";
 
 
-
+    export let page = 0;
     let activePage = writable(0);
 
     let pages : Array<any>= []
@@ -12,6 +12,9 @@
     function RegisterPage(id : Symbol){
         pages = [...pages, id]
         return pages.findIndex(el=>{return el == id})
+    }
+    function SetPage(index : number){
+        activePage.set(index);
     }
     function AdvancePage(increment : number){
         if($activePage + increment > pages.length){
@@ -29,7 +32,9 @@
         AdvancePage
     })
 
-    $:console.log($activePage)
+    activePage.subscribe(pg=>{
+        page = pg
+    })
 
 
 </script>

@@ -54,7 +54,7 @@
 </script>
 
 {#if ingredients?.length == 0}
-<button on:click={AddIngredient} type="button" class="min-h-[8rem] flex flex-col justify-center items-center w-full">
+<button on:click={AddIngredient} type="button" class="min-h-[12rem] flex flex-col justify-center items-center w-full">
     <span aria-hidden="true" class="block m-auto bg-[#e4e4e4] rounded-full p-[.5rem] w-fit">
         <Cross fill="#cbcbcb" class="text-[#cbcbcb]" size={50}/>
     </span>

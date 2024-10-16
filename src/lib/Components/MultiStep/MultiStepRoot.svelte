@@ -6,6 +6,7 @@
 
     export let page = 0;
     let activePage = writable(0);
+    let transitionDirection = writable(1);
 
     let pages : Array<any>= []
 
@@ -21,15 +22,17 @@
             activePage.set(0);
             return
         }
+        transitionDirection.set(Math.sign(increment))
         activePage.update(el=>{return el + increment});
-        console.log(increment)
     }
     
 
     setContext(key, {
         activePage,
         RegisterPage,
-        AdvancePage
+        AdvancePage,
+        SetPage,
+        transitionDirection
     })
 
     activePage.subscribe(pg=>{
@@ -39,7 +42,8 @@
 
 </script>
 
-<slot/>
+
+    <slot/>
 
 
 

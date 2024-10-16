@@ -6,17 +6,21 @@
 
     
     const sym = Symbol();
-    const {activePage, RegisterPage} = getContext(key) as any
+    const {activePage, RegisterPage, transitionDirection} = getContext(key) as any
 
     const index = RegisterPage(sym)
 
-
+   
     
 
 </script>
 
-    {#if $activePage == index}
-        <div in:fly={{x: 100, delay : 200}} out:fly={{x: -100, duration : 200}}>
-            <slot/>
-        </div>
-    {/if}
+
+
+    
+        {#if $activePage == index}
+            <div class="row-[1] col-[1] w-full h-full" in:fly={{x: 100 * $transitionDirection, delay : 200, duration : 200, }} out:fly={{x: -100 * $transitionDirection, duration : 200}}>
+                <slot/>
+            </div>
+        {/if}
+

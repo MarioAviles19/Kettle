@@ -89,7 +89,7 @@
             <RecipeDetailsInput/>
 
 
-            <button class="bg-accent-1 text-white rounded-md m-auto p-1 block">Submit</button>
+            <button class="bg-accent-1 text-white rounded-md m-auto p-1 block font-bold">Save</button>
         </MultiStep.Page>
     </MultiStep.Pages>
 </MultiStep.Root>

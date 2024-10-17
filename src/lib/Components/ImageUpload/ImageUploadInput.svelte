@@ -22,10 +22,10 @@
 </script>
 
 
-    <label {...$$restProps}>
+    <label {...$$restProps} >
         {#if url}
             <img src={url} alt="meow">
         {/if}
         <slot/>
-        <input bind:this={inputElement} bind:files={files} on:change={HandleChange} type="file" accept="image/*" class="invisible">
+        <input  bind:this={inputElement} bind:files={files} on:change={HandleChange} type="file" accept="image/*" class="invisible">
     </label>

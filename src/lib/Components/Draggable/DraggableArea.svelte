@@ -20,14 +20,36 @@
     const GetCurrentDraggedItem = () => activeItem;
 
     const DropItem = (target : symbol)=>{
-
+        console.log({dragItems, each})
         const activeIndex = dragItems.findIndex(el=>{return el.id === $activeItem?.id})
         const targetIndex = dragItems.findIndex((el)=>{return el.id === target}) as number
         if(activeIndex !== -1 && targetIndex !== -1){
         //swap values
-        [each[activeIndex], each[targetIndex]] = [each[targetIndex], each[activeIndex]]
+
+        const item = each[activeIndex];
+        //Get rid of item being moved
+        each.splice(activeIndex, 1);
+        //Place it at the target index
+        each.splice(targetIndex, 0, item)
         each = each;
-        console.log(each);
+        
+        console.log({each, targetIndex, activeIndex});
+        }
+        activeItem.set(null)
+    }
+    function AddItemToEnd(){
+
+        const activeIndex = dragItems.findIndex(el=>{return el.id === $activeItem?.id})
+        if(activeIndex !== -1){
+
+
+        const item = each[activeIndex];
+        //Get rid of item being moved
+        each.splice(activeIndex, 1);
+        //Place it at the end
+        each.push(item)
+        each = each;
+        
         }
         activeItem.set(null)
     }
@@ -37,7 +59,8 @@
         GetDragItems : ()=> dragItems,
         ActiveDraggedItem : GetCurrentDraggedItem,
         DropItem,
-        RemoveItem
+        RemoveItem,
+        AddItemToEnd
 
     })
 

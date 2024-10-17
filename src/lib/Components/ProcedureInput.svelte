@@ -43,7 +43,7 @@
                         </Draggable.RemoveButton>
               
                 </div>
-                <textarea on:focusin={()=>{SetFocusState(i)}} on:focusout={()=>{}} bind:this={stepInputElements[i]} placeholder="Enter info..." class="border-2 border-black rounded w-full min-h-[7rem]" bind:value={steps[i]}></textarea>
+                <textarea on:focusin={()=>{SetFocusState(i)}} on:focusout={()=>{}} bind:this={stepInputElements[i]} placeholder="Enter info..." class="border-2 p-1 border-black rounded w-full min-h-[7rem]" bind:value={steps[i]}></textarea>
             </li>
         </Draggable.Item>
         {/each}

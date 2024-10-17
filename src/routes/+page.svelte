@@ -75,7 +75,7 @@
 
         <MultiStep.Page>
             <div class="composeStep">
-                <h3>Procedure</h3>
+                <h3 class="text-xl font-bold">Procedure</h3>
 
                 <ProcedureInput/>
 

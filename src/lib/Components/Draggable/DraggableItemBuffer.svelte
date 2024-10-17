@@ -7,7 +7,7 @@
 
     
     
-    const {GetDragItems, ActiveDraggedItem, DropItem} = getContext<any>(key)
+    const {GetDragItems, ActiveDraggedItem, AddItemToEnd} = getContext<any>(key)
     
     
     
@@ -26,7 +26,7 @@
         draggingOver = false;
     }
     function PointerUp(){
-        DropItem(items[items.length]?.id)
+        AddItemToEnd()
     }
     let draggingOver = false;
     
@@ -39,7 +39,7 @@
     <div {...$$restProps}  on:pointerup={PointerUp} on:pointerenter={PointerEnter} on:pointerleave={PointerLeave} role="listitem">
         
         {#if draggingOver}
-        <div class="w-full rounded-md border-accent-1 border-dotted border-4" style="height : {$activeItem?.height | 0}px">
+        <div class="w-full rounded-md border-accent-1 border-dotted border-4 min-h-[1rem]" style="height : {$activeItem?.height | 0}px">
             
         </div>
         {/if}

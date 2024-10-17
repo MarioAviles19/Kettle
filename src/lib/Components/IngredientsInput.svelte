@@ -4,7 +4,7 @@
     import { tick } from "svelte";
 
     export let ingredients : Array<string> = [];
-    export let inputValue : string = "";
+    
 
     let input : HTMLInputElement;
 

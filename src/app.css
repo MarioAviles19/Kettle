@@ -12,3 +12,7 @@
     background: var(--color-accent-1);
     color: white;
   }
+
+  html {
+    scroll-behavior: smooth;
+  }

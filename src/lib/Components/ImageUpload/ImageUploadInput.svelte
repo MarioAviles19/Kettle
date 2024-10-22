@@ -27,5 +27,5 @@
             <img src={url} alt="meow">
         {/if}
         <slot/>
-        <input  bind:this={inputElement} bind:files={files} on:change={HandleChange} type="file" accept="image/*" class="invisible">
+        <input  bind:this={inputElement} bind:files={files} on:change={HandleChange} type="file" accept="image/*" class="invisible w-0">
     </label>

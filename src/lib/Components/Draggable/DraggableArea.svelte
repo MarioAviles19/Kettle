@@ -68,6 +68,9 @@
     function RemoveItem(index : number){
         each.splice(index, 1);
         each = each;
+
+        dragItems.splice(index,1);
+        dragItems = dragItems;
         console.log(index);
         console.log(each);
     }

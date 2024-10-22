@@ -15,13 +15,24 @@
     }
     function FocusLastElement(arr : Array<HTMLTextAreaElement>){
         if(arr.length > 0 && focusFlag){
-            arr[arr.length - 1].focus()
+            arr[arr.length - 1]?.focus()
             focusFlag = false;
         }
     }
     function SetFocusState(index : number){
         focusedIndex = index
         
+    }
+    function ResizeToFit(e : Event){
+
+        const target = e.target as HTMLElement | null
+
+        if(target && target.scrollHeight > 0){
+            
+
+            target.style.height = "auto"
+            target.style.height = target.scrollHeight + 'px';
+        }
     }
 
     $: FocusLastElement(stepInputElements);
@@ -43,7 +54,7 @@
                         </Draggable.RemoveButton>
               
                 </div>
-                <textarea on:focusin={()=>{SetFocusState(i)}} on:focusout={()=>{}} bind:this={stepInputElements[i]} placeholder="Enter info..." class="border-2 p-1 border-black rounded w-full min-h-[7rem]" bind:value={steps[i]}></textarea>
+                <textarea rows="4" on:input={ResizeToFit} on:focusin={()=>{SetFocusState(i)}} on:focusout={()=>{}} bind:this={stepInputElements[i]} placeholder="Enter info..." class="resize-none border-2 p-1 border-black rounded w-full" bind:value={steps[i]}></textarea>
             </li>
         </Draggable.Item>
         {/each}

@@ -29,7 +29,9 @@ function GetParentSymbol(){
     return symbol;
 }
 function RemoveParentItem(){
+    
     let removeIndex = items.findIndex(el=>{return el.id ===symbol})
+    console.log(removeIndex)
     RemoveItem(removeIndex)
   
 }

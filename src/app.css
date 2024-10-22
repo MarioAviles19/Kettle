@@ -16,3 +16,13 @@
   html {
     scroll-behavior: smooth;
   }
+
+  input{
+    border: 2px solid black;
+    border-radius: .25rem;
+    outline: none;
+    transition: border-color 200ms ease;
+  }
+  input:focus{
+    border-color: var(--color-accent-1);
+  }

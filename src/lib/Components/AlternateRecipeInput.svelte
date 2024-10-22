@@ -90,9 +90,21 @@
 
         <MultiStep.Page>
             <RecipeDetailsInput bind:description bind:notes bind:name bind:image />
-
-
             <button class="bg-accent-1 text-white rounded-md m-auto p-1 block font-bold">Save</button>
         </MultiStep.Page>
     </MultiStep.Pages>
 </MultiStep.Root>
+
+<style>
+    .composeStep{
+
+    }
+    .slider{
+        background: linear-gradient(to left, rgba(128, 128, 128, 0.354) 50%, var(--color-accent-1) 50%) right;
+        background-size: 200% 100%;
+        transition: background 800ms ease;
+    }
+    .slider.filled{
+        background-position: left;
+    }
+</style>

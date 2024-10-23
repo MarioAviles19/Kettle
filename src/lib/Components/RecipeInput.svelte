@@ -36,7 +36,21 @@
     let notes = "";
     let procedure : Array<string> = [""];
 
-    $:console.log(ingredientsList.length);
+    export let  recipe = {
+        image,
+        name,
+        description,
+        notes,
+        procedure
+    }
+
+    $:recipe = {
+        image,
+        name,
+        description,
+        notes,
+        procedure
+    };
 
 </script>
 

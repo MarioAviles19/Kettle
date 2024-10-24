@@ -1,5 +1,5 @@
 <script lang=ts>
-    import { Draggable } from "./Draggable";
+    import { Draggable } from "./UI/Draggable";
     import {Plus, X} from "lucide-svelte"
 
     export let steps : Array<string> = [""];

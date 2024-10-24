@@ -6,8 +6,10 @@ export default {
     extend: {
       colors:{
         'accent-1' : 'var(--color-accent-1)',
-        'subtle-light' : "var(--color-subtle-light)"
+        'subtle-light' : "var(--color-subtle-light)",
+        'background-1' : 'white'
       },
+      
       
     },
   },

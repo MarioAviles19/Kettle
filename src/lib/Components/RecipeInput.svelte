@@ -49,12 +49,13 @@
         name,
         description,
         notes,
-        procedure
+        procedure,
+        ingredients: ingredientsList
     };
 
 </script>
 
-<div class="w-full max-w-[40rem] m-auto mb-[10rem]">
+<form on:submit class="w-full max-w-[40rem] m-auto mb-[10rem]">
   
     
         <div id="detail" class="composeStep my-4  p-1 min-h-[25rem]  ">
@@ -92,7 +93,7 @@
             
         </div>
 
-</div>
+    </form>
 <div class="fixed bottom-8 w-full">
     <div class="flex justify-around items-center px-[2rem] w-[90%] min-w-[16rem] max-w-[30rem]  m-auto">
         <a href="#detail"  class="mx-[2px] block p-3 transition-all duration-300 rounded-full outline outline-2 outline-accent-1  {name? "bg-accent-1 text-white" : "bg-white text-accent-1"}" type="button"><Text size={30}/></a>

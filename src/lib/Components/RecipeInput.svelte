@@ -45,7 +45,7 @@
     }
 
     $:recipe = {
-        image,
+        image : $image,
         name,
         description,
         notes,

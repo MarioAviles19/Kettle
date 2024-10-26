@@ -1,7 +1,7 @@
 <script lang=ts>
 
 	import IngredientsInput from "$lib/Components/IngredientsInput.svelte";
-	import { MultiStep } from "$lib/Components/MultiStep";
+	import { MultiStep } from "$lib/Components/UI/MultiStep";
 	import ProcedureInput from "$lib/Components/ProcedureInput.svelte";
 	import { Forward, Apple, CookingPot, Text, ArrowRight, ArrowLeft } from "lucide-svelte";
 	import RecipeDetailsInput from "$lib/Components/RecipeDetailsInput.svelte";
@@ -96,9 +96,7 @@
 </MultiStep.Root>
 
 <style>
-    .composeStep{
 
-    }
     .slider{
         background: linear-gradient(to left, rgba(128, 128, 128, 0.354) 50%, var(--color-accent-1) 50%) right;
         background-size: 200% 100%;

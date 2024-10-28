@@ -3,8 +3,8 @@
 import "../app.css"
 </script>
 
-<header class="flex justify-between items-center">
-    <h1>Kettle</h1>
+<header class="flex justify-between items-center p-2">
+    <h1 class="font-bold text-xl text-accent-1">Kettle</h1>
     <nav>
         <ul class="flex gap-4">
             <li>

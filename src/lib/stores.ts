@@ -1,7 +1,11 @@
 import { onAuthStateChanged } from "firebase/auth";
 import {fireAuth} from "$lib/Firebase"
-import { writable, type Writable } from "svelte/store";
+import { writable, type Writable, get} from "svelte/store";
 import type { User } from "firebase/auth";
+import { browser } from "$app/environment";
+import type { Recipe } from "./types";
+
+
 
 export const draggedElement = writable<null|{name: string, text : string, orderNumber : number}>();
 
@@ -16,3 +20,37 @@ onAuthStateChanged(fireAuth, (user)=>{
 
 })
 
+
+const storage = <T>(key: string, initValue: T): Writable<T> => {
+    const store = writable(initValue);
+    if (!browser) return store;
+
+    const storedValueStr = localStorage.getItem(key);
+    if (storedValueStr != null) store.set(JSON.parse(storedValueStr));
+
+    store.subscribe((val) => {
+
+        if ([null, undefined].includes(val as any)) {
+            localStorage.removeItem(key)
+        } else {
+            localStorage.setItem(key, JSON.stringify(val))
+            console.log({val, str : JSON.stringify(val)})
+        }
+   
+    })
+
+    window.addEventListener('storage', () => {
+        const storedValueStr = localStorage.getItem(key);
+        if (storedValueStr == null) return;
+
+        const localValue: T = JSON.parse(storedValueStr)
+        if (localValue !== get(store)) store.set(localValue);
+    });
+
+    return store;
+}
+
+export const PersistantStorage = storage;
+
+
+export const RecipeCache = PersistantStorage<{[key : string] : Recipe}>("recipeCache", {})

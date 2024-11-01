@@ -36,7 +36,7 @@
     let notes = "";
     let procedure : Array<string> = [""];
 
-    export let  recipe = {
+    export let recipe = {
         image,
         name,
         description,

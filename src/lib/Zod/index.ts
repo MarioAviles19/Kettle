@@ -11,3 +11,5 @@ export const RecipeSchema = z.object({
 
 })
 
+export type Recipe = z.infer<typeof RecipeSchema>;
+

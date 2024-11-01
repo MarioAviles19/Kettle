@@ -38,26 +38,13 @@
     }
 
 </script>
-
-<h2 class="text-xl font-bold mb-7">{mockRecipe.name}</h2>
-
-<h3  class="text-xl font-bold">Ingredients</h3>
-
-{#each mockRecipe.bites as bite}
-    <div class="my-3">
-        <h4 class="font-semibold">{bite.name}</h4>
-        <ul class="px-5 list-disc my-1">
-            {#each bite.ingredients as ingredient}
-                <li>{ingredient}</li>
-            {/each}
-        </ul>
-    </div>
-{/each}
-
-<h3 class="text-xl font-bold">Instructions</h3>
-
-{#each mockRecipe.bites as bite}
-    {#if bite.steps && bite.steps?.length > 0}
+<div class="max-w-[50rem] m-auto">
+    
+    <h2 class="text-xl font-bold mb-7">{mockRecipe.name}</h2>
+    
+    <h3  class="text-xl font-bold">Ingredients</h3>
+    
+    {#each mockRecipe.bites as bite}
         <div class="my-3">
             <h4 class="font-semibold">{bite.name}</h4>
             <ul class="px-5 list-disc my-1">
@@ -66,23 +53,38 @@
                 {/each}
             </ul>
         </div>
-    {/if}
-{/each}
-
-{#each mockRecipe.steps as step, i}
-    <ol class="px-5 my-1">
+    {/each}
     
-            <li class="my-3">
-                <span class="rounded-full inline-flex justify-center items-center h-[2rem] w-[2rem] text-accent-1  border-accent-1 border-2 text-2xl mr-2">
-                    <span class="block">{i + 1}</span>
-                </span>{step}
-            </li>
-        
-    </ol>
-{/each}
-
-{#if mockRecipe.notes}
-
-    <h3 class="text-xl font-bold">Notes</h3>
-    <p>{mockRecipe.notes}</p>
-{/if}
+    <h3 class="text-xl font-bold">Instructions</h3>
+    
+    {#each mockRecipe.bites as bite}
+        {#if bite.steps && bite.steps?.length > 0}
+            <div class="my-3">
+                <h4 class="font-semibold">{bite.name}</h4>
+                <ul class="px-5 list-disc my-1">
+                    {#each bite.ingredients as ingredient}
+                        <li>{ingredient}</li>
+                    {/each}
+                </ul>
+            </div>
+        {/if}
+    {/each}
+    
+    {#each mockRecipe.steps as step, i}
+        <ol class="px-5 my-1">
+    
+                <li class="my-3">
+                    <span class="rounded-full inline-flex justify-center items-center h-[2rem] w-[2rem] text-accent-1  border-accent-1 border-2 text-2xl mr-2">
+                        <span class="block">{i + 1}</span>
+                    </span>{step}
+                </li>
+    
+        </ol>
+    {/each}
+    
+    {#if mockRecipe.notes}
+    
+        <h3 class="text-xl font-bold">Notes</h3>
+        <p>{mockRecipe.notes}</p>
+    {/if}
+</div>

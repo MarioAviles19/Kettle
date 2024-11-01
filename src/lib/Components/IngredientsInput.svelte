@@ -1,5 +1,5 @@
 <script lang=ts>
-    import { Draggable } from "./Draggable";
+    import { Draggable } from "./UI/Draggable";
     import { GripHorizontal, Cross, Plus } from "lucide-svelte";
     import { tick } from "svelte";
 
@@ -58,7 +58,7 @@
 </script>
 
 {#if ingredients?.length == 0}
-<button on:click={AddIngredient} type="button" class="group min-h-[25rem] flex flex-col justify-center items-center w-full bg-[#e9e9e9c5] rounded-xl p-9">
+<button on:click={AddIngredient} type="button" class="group min-h-[25rem] flex flex-col justify-center items-center w-full bg-[#ecececc5] rounded-xl p-9">
     <span aria-hidden="true" class="group-active:text-accent-1 group-active:bg-[#ffc277] transition-colors text-[#bbbbbb] duration-75 block m-auto bg-[#e4e4e4] rounded-full p-[.5rem] w-fit">
         <Cross size={70}/>
     </span>
@@ -77,7 +77,6 @@
                 <li class="my-1">
                     <div class="flex justify-left items-center w-full gap-1">
                     <textarea rows={1} class="resize-none p-1 w-full inline h-auto" on:focusout={()=>{RemoveIfEmpty(i)}} on:input={ResizeToFit} on:keydown={HandleKeyboardInput} bind:this={inputElements[i]} bind:value={ingredients[i]}/>
-        
                     <Draggable.Handle>
                         <div>
                             <GripHorizontal size={30}/>

@@ -1,4 +1,8 @@
 <script lang=ts>
+    import { addDoc, collection } from "firebase/firestore";
+    import { authState } from "$lib/stores";
+    import { firestore } from "$lib/Firebase";
+    import PopUp from "$lib/Components/UI/PopUp/PopUp.svelte";
     import RecipeInput from "$lib/Components/RecipeInput.svelte";
 
     let recipe : {
@@ -7,10 +11,32 @@
     description: string;
     notes: string;
     procedure: string[];
+    ingredients : string[];
 } | undefined
+
+ async function UploadRecipe(e : SubmitEvent){
+    e.preventDefault();
+    const ref = collection(firestore, "TestRecipes/");
+    const payload = {...recipe, ownerID : $authState?.uid}
+
+    console.log(payload)
+    const res = await addDoc(ref, {...recipe, ownerID : $authState?.uid});
+
+    UploadSuccess()
+    console.log(res)
+ }
+
+ function UploadSuccess(){
+    console.log("success")
+ }
+
+ function UploadFailure(){
+
+ }
+
 
 </script>
 
-<RecipeInput bind:recipe/>
+<RecipeInput on:submit={UploadRecipe} bind:recipe/>
 
 

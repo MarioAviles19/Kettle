@@ -1,7 +1,7 @@
 <script lang=ts>
     import { ResizeToFitInput } from "./Misc";
     import type { Writable } from "svelte/store";
-	import { ImageUpload } from "./ImageUpload";
+	import { ImageUpload } from "./UI/ImageUpload";
     
     import {Camera} from "lucide-svelte"
 

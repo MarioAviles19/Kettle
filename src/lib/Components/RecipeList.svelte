@@ -1,23 +1,20 @@
 <script lang=ts>
+    import { List } from "./UI/List";
+    import { Text } from "lucide-svelte";
 	import type { Recipe } from "$lib/Zod";
-
     export let data : Recipe[];
     export let mode : "table" | "blocks" = "table";
 </script>
 
 
-{#if mode == "table"}
-    <table class="w-full">
-        <tr>
-            <th>Name</th>
-            <th>Modified</th>
-        </tr>
-        {#each data as recipe}
-        <tr>
-            <td>{recipe.name}</td>
-            <td>10:03PM 10/3/2024</td>
-        </tr>
-        {/each}
-    </table>
+<List.Root>
 
-{/if}
+    {#each data as recipe}
+    <List.Item>
+        <List.Data>
+            
+        </List.Data>
+    </List.Item>
+
+    {/each}
+</List.Root>

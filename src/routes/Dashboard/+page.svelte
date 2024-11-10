@@ -3,7 +3,8 @@
 	import { authState } from "$lib/stores";
     import { getDocs, collection, query, where } from "firebase/firestore";
     import { RecipeCache } from "$lib/stores";
-	import type { Recipe } from "$lib/types";
+	import type { Recipe } from "$lib/Zod";
+	import RecipeList from "$lib/Components/RecipeList.svelte";
 
 
     async function GetRecipes(){
@@ -52,10 +53,6 @@
     {#await GetRecipes()}
         loading
     {:then recipes} 
-        {#each recipes as recipe}
-
-            <h3>{recipe.name}</h3>
-
-        {/each}
+        <RecipeList data={recipes}/>
     {/await}
 {/if}

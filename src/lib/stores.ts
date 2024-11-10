@@ -3,7 +3,7 @@ import {fireAuth} from "$lib/Firebase"
 import { writable, type Writable, get} from "svelte/store";
 import type { User } from "firebase/auth";
 import { browser } from "$app/environment";
-import type { Recipe } from "./types";
+import type { Recipe } from "./Zod";
 
 
 

@@ -2,4 +2,6 @@
     export let isDefault = false;
 </script>
 
-<slot/>
+<div {...$$restProps}>
+    <slot/>
+</div>

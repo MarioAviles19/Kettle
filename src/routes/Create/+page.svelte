@@ -1,5 +1,5 @@
 <script lang=ts>
-    import { addDoc, collection } from "firebase/firestore";
+    import { addDoc, collection, serverTimestamp } from "firebase/firestore";
     import { authState } from "$lib/stores";
     import { firestore } from "$lib/Firebase";
     import PopUp from "$lib/Components/UI/PopUp/PopUp.svelte";
@@ -20,7 +20,7 @@
     const payload = {...recipe, ownerID : $authState?.uid}
 
     console.log(payload)
-    const res = await addDoc(ref, {...recipe, ownerID : $authState?.uid});
+    const res = await addDoc(ref, {...recipe, ownerID : $authState?.uid, modified : serverTimestamp(), created : serverTimestamp()});
 
     UploadSuccess()
     console.log(res)

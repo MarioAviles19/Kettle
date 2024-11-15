@@ -20,7 +20,7 @@ import "../app.css"
     </nav>
 </header>
 
-<main class="p-1">
+<main class="p-2">
     <slot/>
 
     <PopUp/>

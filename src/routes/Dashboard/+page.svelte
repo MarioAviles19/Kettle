@@ -23,7 +23,8 @@
         if(!result.empty){
             result.forEach(doc => {
                 const val = doc.data() as Recipe;
-
+                console.log(doc);
+                console.log(doc.data())
                 payload.push({...val, id : doc.id})
                 //if the doc is not in the cache, add it.
                 if(!$RecipeCache[doc.id]){
@@ -45,11 +46,8 @@
     }
 </script>
 
-
+<h2 class="text-2xl ">My Recipes</h2>
 {#if $authState}
-
-
-
     {#await GetRecipes()}
         loading
     {:then recipes} 

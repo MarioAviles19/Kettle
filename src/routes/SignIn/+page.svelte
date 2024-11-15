@@ -2,4 +2,4 @@
     import SignIn from "$lib/Components/UI/SignIn.svelte"
 </script>
 
-<SignIn class="m-auto max-w-[22rem] px-4"/>
+<SignIn class="m-auto max-w-[22rem] px-4 bg-white rouded-md"/>

@@ -55,7 +55,7 @@
 
 </script>
 
-<form on:submit class="w-full max-w-[40rem] m-auto mb-[10rem]">
+<form on:submit class="w-full max-w-[40rem] m-auto mb-[10rem] bg-white p-4">
   
     
         <div id="detail" class="composeStep my-4  p-1 min-h-[25rem]  ">

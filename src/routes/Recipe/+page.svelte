@@ -1,5 +1,32 @@
 <script lang=ts>
 
+    import { RecipeCache } from "$lib/stores";
+
+    import { page } from "$app/stores";
+	import { onMount } from "svelte";
+
+    let recipeID = $page.url.searchParams.get("r");
+
+
+
+    onMount(()=>{
+        if(!recipeID){
+            return;
+        }
+        
+
+
+    })
+
+    async function GetRecipe(id : string){
+        const recipeFromCache = $RecipeCache[id];
+        //If the recipe is in the cache, load that instead
+        console.log(recipeFromCache)
+        return recipeFromCache;
+        
+
+    }
+
     const mockRecipe = {
         name: "Apple Crisp",
             bites : [{
@@ -38,6 +65,55 @@
     }
 
 </script>
+
+
+{#await GetRecipe(recipeID || "")}
+    loading...
+{:then recipe} 
+<div class="max-w-[50rem] m-auto bg-white rounded-lg p-4 shadow-md">
+    
+    <h2 class="text-2xl font-bold mb-7">{recipe.name}</h2>
+    <div class="flex">
+        <button>
+        </button>
+    </div>
+    
+    <h3  class="text-xl font-bold">Ingredients</h3>
+    
+    
+        <div class="my-3">
+            
+            <ul class="px-5 list-disc my-1">
+                {#each recipe.ingredients as ingredient}
+                    <li>{ingredient}</li>
+                {/each}
+            </ul>
+        </div>
+    
+    
+    <h3 class="text-xl font-bold">Instructions</h3>
+    
+    {#each recipe.procedure as step, i}
+        <ol class="px-5 my-1">
+    
+            <li class="my-3">
+                <span class="rounded-full inline-flex justify-center items-center h-[2rem] w-[2rem] text-accent-1  border-accent-1 border-2 text-2xl mr-2">
+                    <span class="block">{i + 1}</span>
+                </span>{step}
+            </li>
+    
+        </ol>
+    {/each}
+    
+    {#if recipe.notes}
+    
+        <h3 class="text-xl font-bold">Notes</h3>
+        <p>{recipe.notes}</p>
+    {/if}
+</div>
+{/await}
+
+
 <div class="max-w-[50rem] m-auto">
     
     <h2 class="text-xl font-bold mb-7">{mockRecipe.name}</h2>

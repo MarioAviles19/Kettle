@@ -21,7 +21,7 @@
     </List.Header>
 
     {#each data as recipe}
-    <a href="/recipe?r={recipe.id}">
+    <a href="/Recipe?r={recipe.id}">
         <List.Item class="border-b border-soft-black hover:bg-[#f3f3f3] font-medium hidden sm:grid py-1">
 
             <div class="row-span-2 sm:hidden flex justify-center items-center ">

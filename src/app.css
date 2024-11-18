@@ -28,3 +28,10 @@
   input:focus{
     border-color: var(--color-accent-1);
   }
+
+  .quanitity{
+    color: var(--color-accent-1)
+  }
+  .unit{
+    color: var(--color-accent-1)
+  }

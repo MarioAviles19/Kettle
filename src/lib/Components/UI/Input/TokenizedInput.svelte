@@ -9,28 +9,39 @@
 
     const units = ['tbs', 'tsp', 'oz'];
 
-    let tokens : any[] = [];
+    export let tokens : any[] = [];
 
 
 
     function HandleInput(e : Event){
+
+        inputText = fauxInput.innerText;
+        tokens = tokenizer.Parse(inputText);  
+    }
+    function SyntaxHighlighting(e : Event){
+        const currentSelection = window.getSelection();
+        if(!currentSelection){
+            return;
+        }
+        const currentRange = currentSelection.getRangeAt(0);
+        const cursorPosition = currentRange.startOffset;
+        
         const el = e.target as HTMLElement
         if(!el){
             return;
         }
-        inputText = fauxInput.innerText;
         StyleText(inputText);
-
+        console.log({cursorPosition, len : el.childNodes.length})
         const range = document.createRange();
         const selection = window.getSelection();
         range.setStart(el, el.childNodes.length);
+        
         range.collapse(true);
         if(!selection){
             return;
         }
         selection.removeAllRanges();
         selection.addRange(range);
-        
     }
     function StyleText(str : string){
         let words = str.split(" ");
@@ -53,7 +64,6 @@
         })
 
         fauxInput.innerHTML = outStrings.join(" ");
-        tokens = tokenizer.Parse(inputText);
     }
 
 </script>

@@ -7,6 +7,3 @@
 
 <TokenizedInput/>
 
-<style>
-
-</style>

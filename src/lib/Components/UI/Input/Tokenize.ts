@@ -3,7 +3,15 @@
 export class Tokenizer{
 
 
-    units = ["tbs", "oz"]
+    units = [
+        // Volume
+        'tsp', 'tsps', 'tbsp', 'tbsp', 'cup', 'cups', 'ml', 
+        'ml', 'l', 'l', 'fl oz', 'fl oz', 'qt', 'qts', 'pt', 
+        'pts', 'gal', 'gals',
+      
+        // Weight
+        'g', 'gs', 'kg', 'kgs', 'oz', 'ozs', 'lb', 'lbs', 'mg', 'mgs'
+      ];
 
 
     Parse(str : string){
@@ -16,7 +24,6 @@ export class Tokenizer{
             currentToken += char.trim();
             //If the current character is whitespace or it is the end of the line, add token to array
             if(char.trim() === "" || i == str.length - 1){
-                console.log(currentToken)
 
                 if(currentToken.toString().toLowerCase() === "of"){
                     if(!tokens.some(val=>{return val.interstitial == true})){
@@ -36,16 +43,32 @@ export class Tokenizer{
                     //TODO: Consider coupling these
                     //Maybe check if the last item in the token array is a quantity and then add itself to that token? 
                     if(tokens.some(t=>{return t.isQuantity == true})){
-                        //Add token
-                        tokens.push({
-                            text : currentToken,
-                            isUnit : true
-                        })
+
+                        //if the last token was a quantity, add this unit to that token
+                        const lastToken = tokens[tokens.length - 1];
+                        if(lastToken.isQuantity){
+                            lastToken.unit = currentToken.toString().toLowerCase()
+                        } else{
+
+                            //Add token
+                            tokens.push({
+                                text : currentToken,
+                                isUnit : true
+                            })
+                        }
                     } 
                 
                 } else if (parseInt(currentToken)){
                     //If the next char is a number or slash, continue
-                    if(str[i+1] === "/" || parseInt(str[i+1] || "")){
+                    if(str[i+1] === "/" || parseInt(str[i+1])){
+                        currentToken += " ";
+
+                        continue
+                    }
+                    //Or if the next character is a space and then a number e.g. '1 1/2'
+                    if(str[i + 1]?.trim() === "" && parseInt(str[i + 2])){
+                        //Add a space since the space will be trimmed
+                        currentToken += " ";
                         continue
                     }
                         //Add token

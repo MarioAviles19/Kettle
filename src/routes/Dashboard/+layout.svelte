@@ -1,5 +1,10 @@
 <script lang=ts>
     import { SquarePen, Folder, Users } from "lucide-svelte";
+    interface Props {
+        children?: import('svelte').Snippet;
+    }
+
+    let { children }: Props = $props();
 </script>
 
 <div class="flex justify-start w-full gap-2">
@@ -21,6 +26,6 @@
         </nav>
     </div>
     <div class="w-full bg-white rounded-md p-3 min-h-[70svh] mr-5">
-        <slot/>
+        {@render children?.()}
     </div>
 </div>

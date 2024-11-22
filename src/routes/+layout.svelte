@@ -1,6 +1,11 @@
 <script lang=ts>
     import PopUp from "$lib/Components/UI/PopUp/PopUp.svelte";
 import "../app.css"
+    interface Props {
+        children?: import('svelte').Snippet;
+    }
+
+    let { children }: Props = $props();
 </script>
 
 <header class="flex justify-between items-center p-2">
@@ -21,7 +26,7 @@ import "../app.css"
 </header>
 
 <main class="p-2">
-    <slot/>
+    {@render children?.()}
 
     <PopUp/>
 </main>

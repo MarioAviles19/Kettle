@@ -3,6 +3,11 @@
     import {scale} from "svelte/transition"
     import { key, handleKey} from ".";
     import type { Writable } from "svelte/store";
+    interface Props {
+        [key: string]: any
+    }
+
+    let { ...rest }: Props = $props();
     
 
     
@@ -28,7 +33,7 @@
     function PointerUp(){
         AddItemToEnd()
     }
-    let draggingOver = false;
+    let draggingOver = $state(false);
     
     
     
@@ -36,7 +41,7 @@
     
     
     
-    <div {...$$restProps}  on:pointerup={PointerUp} on:pointerenter={PointerEnter} on:pointerleave={PointerLeave} role="listitem">
+    <div {...rest}  onpointerup={PointerUp} onpointerenter={PointerEnter} onpointerleave={PointerLeave} role="listitem">
         
         {#if draggingOver}
         <div class="w-full rounded-md border-accent-1 border-dotted border-4 min-h-[1rem]" style="height : {$activeItem?.height | 0}px">

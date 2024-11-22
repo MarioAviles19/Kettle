@@ -5,7 +5,7 @@ export class Tokenizer{
 
     units = [
         // Volume
-        'tsp', 'tsps', 'tbsp', 'tbsp', 'cup', 'cups', 'ml', 
+        'tsp', 'tsps', 'tbsp', 'tbsp', 'tbs', 'cup', 'cups', 'ml', 
         'ml', 'l', 'l', 'fl oz', 'fl oz', 'qt', 'qts', 'pt', 
         'pts', 'gal', 'gals',
       

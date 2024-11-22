@@ -1,6 +1,10 @@
 <script lang=ts>
-    export let conversionFactor = 1;
-    export let token : {text : string, isQuantity? : boolean, isUnit? : boolean, isItem? : boolean, unit? : string}
+    interface Props {
+        conversionFactor?: number;
+        token: { text : string, isQuantity? : boolean, isUnit? : boolean, isItem? : boolean, unit? : string};
+    }
+
+    let { conversionFactor = 1, token }: Props = $props()
 
 
 </script>

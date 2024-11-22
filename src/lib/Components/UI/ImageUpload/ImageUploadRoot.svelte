@@ -3,7 +3,12 @@
 	import { writable } from "svelte/store";
     import { key } from ".";
 
-    export let imageData = writable<Blob | null>(null);
+    interface Props {
+        imageData?: any;
+        children?: import('svelte').Snippet;
+    }
+
+    let { imageData = writable<Blob | null>(null), children }: Props = $props();
     let imageURL = writable<string | null>(null);
 
     setContext(key, {
@@ -14,4 +19,4 @@
 
 </script>
 
-<slot/>
+{@render children?.()}

@@ -3,12 +3,16 @@
     import { GripHorizontal, Cross, Plus } from "lucide-svelte";
     import { tick } from "svelte";
 
-    export let ingredients : Array<string> = [];
+  interface Props {
+    ingredients?: Array<string>;
+  }
+
+  let { ingredients = $bindable([]) }: Props = $props();
     
 
     let input : HTMLInputElement;
 
-    let inputElements : Array<HTMLTextAreaElement> = [];
+    let inputElements : Array<HTMLTextAreaElement> = $state([]);
 
     function AddIngredient(){
         
@@ -58,7 +62,7 @@
 </script>
 
 {#if ingredients?.length == 0}
-<button on:click={AddIngredient} type="button" class="group min-h-[25rem] flex flex-col justify-center items-center w-full bg-[#ecececc5] rounded-xl p-9">
+<button onclick={AddIngredient} type="button" class="group min-h-[25rem] flex flex-col justify-center items-center w-full bg-[#ecececc5] rounded-xl p-9">
     <span aria-hidden="true" class="group-active:text-accent-1 group-active:bg-[#ffc277] transition-colors text-[#bbbbbb] duration-75 block m-auto bg-[#e4e4e4] rounded-full p-[.5rem] w-fit">
         <Cross size={70}/>
     </span>
@@ -76,7 +80,7 @@
             
                 <li class="my-1">
                     <div class="flex justify-left items-center w-full gap-1">
-                    <textarea rows={1} class="resize-none p-1 w-full inline h-auto" on:focusout={()=>{RemoveIfEmpty(i)}} on:input={ResizeToFit} on:keydown={HandleKeyboardInput} bind:this={inputElements[i]} bind:value={ingredients[i]}/>
+                    <textarea rows={1} class="resize-none p-1 w-full inline h-auto" onfocusout={()=>{RemoveIfEmpty(i)}} oninput={ResizeToFit} onkeydown={HandleKeyboardInput} bind:this={inputElements[i]} bind:value={ingredients[i]}></textarea>
                     <Draggable.Handle>
                         <div>
                             <GripHorizontal size={30}/>
@@ -93,7 +97,7 @@
     </ul>
    
     <div >
-        <button class="block m-auto bg-accent-1 rounded-full text-white" type="button" on:click={AddIngredient}><Plus size={30}/></button>
+        <button class="block m-auto bg-accent-1 rounded-full text-white" type="button" onclick={AddIngredient}><Plus size={30}/></button>
     </div>
   
 

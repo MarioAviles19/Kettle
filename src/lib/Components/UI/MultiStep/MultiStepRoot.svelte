@@ -4,7 +4,12 @@
 	import { writable } from "svelte/store";
 
 
-    export let page = 0 
+    interface Props {
+        page?: number;
+        children?: import('svelte').Snippet;
+    }
+
+    let { page = $bindable(0), children }: Props = $props();
     let activePage = writable(0);
     let transitionDirection = writable(1);
 
@@ -48,7 +53,7 @@
 </script>
 
 
-    <slot/>
+    {@render children?.()}
 
 
 

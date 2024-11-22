@@ -1,4 +1,7 @@
 <script lang=ts>
+  import { run, createBubbler } from 'svelte/legacy';
+
+  const bubble = createBubbler();
     import IngredientsInput from "./IngredientsInput.svelte";
     import ProcedureInput from "./ProcedureInput.svelte";
     import RecipeDetailsInput from "./RecipeDetailsInput.svelte";
@@ -7,7 +10,7 @@
     import { CookingPot, Text, Carrot} from "lucide-svelte"
     
 
-    let ingredientsList : Array<string> = [];
+    let ingredientsList : Array<string> = $state([]);
 
 
 
@@ -30,32 +33,38 @@
 
     let currentStep = 1;
     
-    let image : any;
-    let name = "Untitled";
-    let description = "";
-    let notes = "";
-    let procedure : Array<string> = [""];
+    let image : any = $state();
+    let name = $state("Untitled");
+    let description = $state("");
+    let notes = $state("");
+    let procedure : Array<string> = $state([""]);
 
-    export let recipe = {
+  interface Props {
+    recipe?: any;
+  }
+
+  let { recipe = $bindable({
         image,
         name,
         description,
         notes,
         procedure
-    }
+    }) }: Props = $props();
 
-    $:recipe = {
-        image : $image,
-        name,
-        description,
-        notes,
-        procedure,
-        ingredients: ingredientsList
-    };
+    run(() => {
+    recipe = {
+          image : $image,
+          name,
+          description,
+          notes,
+          procedure,
+          ingredients: ingredientsList
+      };
+  });
 
 </script>
 
-<form on:submit class="w-full max-w-[40rem] m-auto mb-[10rem] bg-white p-4">
+<form onsubmit={bubble('submit')} class="w-full max-w-[40rem] m-auto mb-[10rem] bg-white p-4">
   
     
         <div id="detail" class="composeStep my-4  p-1 min-h-[25rem]  ">

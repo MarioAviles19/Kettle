@@ -6,10 +6,19 @@
     import {Camera} from "lucide-svelte"
 
 
-    export let image : Writable<Blob | null>;
-    export let name : string;
-    export let description : string;
-    export let notes : string;
+    interface Props {
+        image: Writable<Blob | null>;
+        name: string;
+        description: string;
+        notes: string;
+    }
+
+    let {
+        image = $bindable(),
+        name = $bindable(),
+        description = $bindable(),
+        notes = $bindable()
+    }: Props = $props();
 
     function ResizeToFit(e : Event){
 
@@ -50,7 +59,7 @@
 
     <div class="my-2">   
         <h3 class="text-xl font-bold">description</h3>
-        <textarea on:input={ResizeToFit} bind:value={description} use:ResizeToFitInput class="border-2 border-black rounded w-full min-h-[5rem] p-1"></textarea>
+        <textarea oninput={ResizeToFit} bind:value={description} use:ResizeToFitInput class="border-2 border-black rounded w-full min-h-[5rem] p-1"></textarea>
     </div>
 
 
@@ -58,7 +67,7 @@
 
     <h3 class="font-bold text-xl">Notes</h3>
 
-    <textarea on:input={ResizeToFit} bind:value={notes} placeholder="Enter note..." class="border-2 border-black rounded w-full min-h-[5rem] p-1"></textarea>
+    <textarea oninput={ResizeToFit} bind:value={notes} placeholder="Enter note..." class="border-2 border-black rounded w-full min-h-[5rem] p-1"></textarea>
 
 
 </div>

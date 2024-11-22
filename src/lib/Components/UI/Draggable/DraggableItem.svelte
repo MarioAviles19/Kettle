@@ -5,8 +5,13 @@ import { key, handleKey} from ".";
 import type { Writable } from "svelte/store";
 
 
-export let name : string;
-export let lockDrag = false;
+  interface Props {
+    name: string;
+    lockDrag?: boolean;
+    children?: import('svelte').Snippet;
+  }
+
+  let { name, lockDrag = false, children }: Props = $props();
 
 setContext(handleKey, {
     HandleDragEnter,
@@ -23,7 +28,7 @@ const {GetDragItems, ActiveDraggedItem, DropItem, RemoveItem} = getContext<any>(
 const items : Array<any> = GetDragItems();
 const activeItem = ActiveDraggedItem() as Writable<any>
 
-let height = 20;
+let height = $state(20);
 
 function GetParentSymbol(){
     return symbol;
@@ -56,7 +61,7 @@ function PointerLeave(){
 function PointerUp(){
     DropItem(symbol)
 }
-let draggingOver = false;
+let draggingOver = $state(false);
 
 items.push({id: symbol, data : {}})
 
@@ -66,7 +71,7 @@ items.push({id: symbol, data : {}})
 
 
 
-<div bind:clientHeight={height} on:pointerup={PointerUp} on:pointerenter={PointerEnter} on:pointerleave={PointerLeave} role="listitem" style="{$activeItem === symbol? "opacity: 0" : ""}" class="dragItem" >
+<div bind:clientHeight={height} onpointerup={PointerUp} onpointerenter={PointerEnter} onpointerleave={PointerLeave} role="listitem" style="{$activeItem === symbol? "opacity: 0" : ""}" class="dragItem" >
    
     {#if draggingOver}
         <div class="w-full rounded-md border-accent-1 border-dotted border-4" style="height : {$activeItem?.height | 0}px">
@@ -77,7 +82,7 @@ items.push({id: symbol, data : {}})
 
     
         <div class={$activeItem?.id == symbol? "hidden" : ""}>
-            <slot/>
+            {@render children?.()}
         </div>
     
 

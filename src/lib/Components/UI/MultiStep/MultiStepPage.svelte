@@ -3,6 +3,11 @@
     import { key, pageKey } from ".";
 	import { slide, fly} from "svelte/transition";
 	import { X } from "lucide-svelte";
+   interface Props {
+      children?: import('svelte').Snippet;
+   }
+
+   let { children }: Props = $props();
 
     
     const sym = Symbol();
@@ -20,7 +25,7 @@
     
         {#if $activePage == index}
             <div class="row-[1] col-[1] w-full h-full" in:fly={{x: 100 * $transitionDirection, delay : 200, duration : 200, }} out:fly={{x: -100 * $transitionDirection, duration : 200}}>
-                <slot/>
+                {@render children?.()}
             </div>
         {/if}
 

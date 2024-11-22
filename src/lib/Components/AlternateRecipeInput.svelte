@@ -1,4 +1,6 @@
 <script lang=ts>
+    import { run } from 'svelte/legacy';
+
 
 	import IngredientsInput from "$lib/Components/IngredientsInput.svelte";
 	import { MultiStep } from "$lib/Components/UI/MultiStep";
@@ -6,7 +8,7 @@
 	import { Forward, Apple, CookingPot, Text, ArrowRight, ArrowLeft } from "lucide-svelte";
 	import RecipeDetailsInput from "$lib/Components/RecipeDetailsInput.svelte";
 
-    let ingredients : Array<string> = ["1/2 cups of flour", "2 tbs of sugar"];
+    let ingredients : Array<string> = $state(["1/2 cups of flour", "2 tbs of sugar"]);
 
     let ingredientValue : string;
 
@@ -17,15 +19,17 @@
             ingredientValue = "";
         }
     }
-    $: ingredients;
+    run(() => {
+        ingredients;
+    });
 
-    let currentPage : number;
-    let ingredientsList : Array<string>
+    let currentPage : number = $state();
+    let ingredientsList : Array<string> = $state()
 
-    let image : any;
-    let name = "Untitled";
-    let description = "";
-    let notes = "";
+    let image : any = $state();
+    let name = $state("Untitled");
+    let description = $state("");
+    let notes = $state("");
     let procedure : Array<string> = [""];
     
 </script>

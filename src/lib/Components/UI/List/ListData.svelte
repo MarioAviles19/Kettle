@@ -1,7 +1,13 @@
 <script lang=ts>
-    export let isDefault = false;
+    interface Props {
+        isDefault?: boolean;
+        children?: import('svelte').Snippet;
+        [key: string]: any
+    }
+
+    let { isDefault = false, children, ...rest }: Props = $props();
 </script>
 
-<div {...$$restProps}>
-    <slot/>
+<div {...rest}>
+    {@render children?.()}
 </div>

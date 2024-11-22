@@ -1,11 +1,17 @@
 <script lang=ts>
+    import { run } from 'svelte/legacy';
+
     import { Draggable } from "./UI/Draggable";
     import {Plus, X} from "lucide-svelte"
 
-    export let steps : Array<string> = [""];
-    let focusedIndex = -1;
+    interface Props {
+        steps?: Array<string>;
+    }
+
+    let { steps = $bindable([""]) }: Props = $props();
+    let focusedIndex = $state(-1);
     
-    let stepInputElements : Array<HTMLTextAreaElement> = [];
+    let stepInputElements : Array<HTMLTextAreaElement> = $state([]);
     let focusFlag = false;
 
     function AddStep(){
@@ -35,7 +41,9 @@
         }
     }
 
-    $: FocusLastElement(stepInputElements);
+    run(() => {
+        FocusLastElement(stepInputElements);
+    });
 
 </script>
 
@@ -54,7 +62,7 @@
                         </Draggable.RemoveButton>
               
                 </div>
-                <textarea rows="4" on:input={ResizeToFit} on:focusin={()=>{SetFocusState(i)}} on:focusout={()=>{}} bind:this={stepInputElements[i]} placeholder="Enter info..." class="resize-none border-2 p-1 border-black rounded w-full" bind:value={steps[i]}></textarea>
+                <textarea rows="4" oninput={ResizeToFit} onfocusin={()=>{SetFocusState(i)}} onfocusout={()=>{}} bind:this={stepInputElements[i]} placeholder="Enter info..." class="resize-none border-2 p-1 border-black rounded w-full" bind:value={steps[i]}></textarea>
             </li>
         </Draggable.Item>
         {/each}
@@ -64,5 +72,5 @@
 
 </ul>
 <div>
-    <button class="block m-auto bg-accent-1 rounded-full text-white" type="button" on:click={AddStep}><Plus size={30}/></button>
+    <button class="block m-auto bg-accent-1 rounded-full text-white" type="button" onclick={AddStep}><Plus size={30}/></button>
 </div>

@@ -1,6 +1,8 @@
 <script>
     import { getContext } from "svelte";
     import { key } from ".";
+    /** @type {{children?: import('svelte').Snippet}} */
+    let { children } = $props();
 
     const {AdvancePage, activePage, GetPages} = getContext(key)
 
@@ -11,6 +13,6 @@
 
 </script>
 
-<button class="{$activePage >= $pages?.length - 1? "invisible" : ""}" on:click={MoveForward}>
-    <slot/>
+<button class="{$activePage >= $pages?.length - 1? "invisible" : ""}" onclick={MoveForward}>
+    {@render children?.()}
 </button>

@@ -2,8 +2,12 @@
     import { List } from "./UI/List";
     import { Text } from "lucide-svelte";
 	import type { Recipe } from "$lib/Zod";
-    export let data : Recipe[];
-    export let mode : "table" | "blocks" = "table";
+    interface Props {
+        data: Recipe[];
+        mode?: "table" | "blocks";
+    }
+
+    let { data, mode = "table" }: Props = $props();
 </script>
 
 

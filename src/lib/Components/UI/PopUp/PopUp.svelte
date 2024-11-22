@@ -2,10 +2,10 @@
     import { PopUp } from ".";
     import { fade } from "svelte/transition";
 
-    let open = false;
+    let open = $state(false);
 
-    let name = "Alert";
-    let content = "Please Do bingus wingus";
+    let name = $state("Alert");
+    let content = $state("Please Do bingus wingus");
 
     PopUp.subscribe((e)=>{
         if(e){
@@ -23,7 +23,7 @@
             <h2 class="font-bold mb-2">{name}</h2>
             <p class="font-semibold my-1">{content}</p>
             <div class="flex justify-end">
-                <button on:click={()=>{open = false}} class="px-2 py-1 font-bold bg-accent-1 text-white rounded-md" type="button">close</button>
+                <button onclick={()=>{open = false}} class="px-2 py-1 font-bold bg-accent-1 text-white rounded-md" type="button">close</button>
             </div>
         </div>
     </div>

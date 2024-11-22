@@ -1,8 +1,13 @@
+<script>
+    /** @type {{children?: import('svelte').Snippet, [key: string]: any}} */
+    let { children, ...rest } = $props();
+</script>
 
 
 
-<div {...$$restProps}>
+
+<div {...rest}>
     <div class="grid grid-cols-[repeat(auto-fit,minmax(50px,1fr))]">
-        <slot/>
+        {@render children?.()}
     </div>
 </div>

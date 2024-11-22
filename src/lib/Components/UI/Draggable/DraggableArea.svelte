@@ -8,14 +8,19 @@
 
     //TODO: allow use of component outside of each loop
 
-    export let each : Array<any>;
+    interface Props {
+        each: Array<any>;
+        children?: import('svelte').Snippet;
+    }
+
+    let { each = $bindable(), children }: Props = $props();
 
     let dragItems : Array<{id: Symbol, data : any}> = [];
 
     let activeItem = writable<{id: Symbol, data : any, height : number} | null>(null);
 
-    let mouseY = 0;
-    let mouseX = 0;
+    let mouseY = $state(0);
+    let mouseX = $state(0);
 
     const GetCurrentDraggedItem = () => activeItem;
 
@@ -99,9 +104,9 @@
 
 
 
-<div role="list" on:pointermove={CaptureMouseMovement} on:pointerdown={CaptureMouseMovement} on:pointerup={DragEnd}  class="p-1 touch-none" >
+<div role="list" onpointermove={CaptureMouseMovement} onpointerdown={CaptureMouseMovement} onpointerup={DragEnd}  class="p-1 touch-none" >
 
-    <slot/>
+    {@render children?.()}
 
     <DraggableItemBuffer class="min-h-[1.25rem]" />
 

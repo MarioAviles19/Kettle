@@ -1,6 +1,10 @@
 <script lang=ts>
    
-    export let text : string = "";
+   interface Props {
+      text?: string;
+   }
+
+   let { text = $bindable("") }: Props = $props();
 
 
     let list = ["flour", "eggs", "fish"]
@@ -14,7 +18,7 @@
 </script>
 
 <div class="autocompleteTextbox">
-    <input class="acInput" on:keyup={OnTextEntered} type="text" bind:value={text}>
+    <input class="acInput" onkeyup={OnTextEntered} type="text" bind:value={text}>
     <div class="shadowText"><p><span class="hiddenText">{text + " "}</span>{autocompleteItem}</p></div>
 </div>
 

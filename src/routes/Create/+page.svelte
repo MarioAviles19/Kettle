@@ -12,7 +12,7 @@
     notes: string;
     procedure: string[];
     ingredients : string[];
-} | undefined
+} | undefined = $state()
 
  async function UploadRecipe(e : SubmitEvent){
     e.preventDefault();

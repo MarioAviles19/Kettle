@@ -1,7 +1,13 @@
 <script lang=ts>
     import { setContext } from "svelte";
     import { key } from ".";
-    export let mode : "list" | "block" = "list";
+    interface Props {
+        mode?: "list" | "block";
+        children?: import('svelte').Snippet;
+        [key: string]: any
+    }
+
+    let { mode = "list", children, ...rest }: Props = $props();
 
     
 
@@ -10,6 +16,6 @@
 </script>
 
 
-<div {...$$restProps}>
-    <slot/>
+<div {...rest}>
+    {@render children?.()}
 </div>

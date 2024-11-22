@@ -3,9 +3,15 @@
     import { getContext } from "svelte";
 
     const {imageURL, imageData} = getContext(key) as any;
-    export let inputElement = null;
+    interface Props {
+        inputElement?: any;
+        children?: import('svelte').Snippet;
+        [key: string]: any
+    }
 
-    let files : FileList;
+    let { inputElement = $bindable(null), children, ...rest }: Props = $props();
+
+    let files : FileList = $state();
 
     let url = "";
 
@@ -22,10 +28,10 @@
 </script>
 
 
-    <label {...$$restProps} >
+    <label {...rest} >
         {#if url}
             <img src={url} alt="meow">
         {/if}
-        <slot/>
-        <input  bind:this={inputElement} bind:files={files} on:change={HandleChange} type="file" accept="image/*" class="invisible w-0">
+        {@render children?.()}
+        <input  bind:this={inputElement} bind:files={files} onchange={HandleChange} type="file" accept="image/*" class="invisible w-0">
     </label>

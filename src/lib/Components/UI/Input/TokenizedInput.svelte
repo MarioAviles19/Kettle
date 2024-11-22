@@ -3,13 +3,18 @@
     import { Tokenizer } from "./Tokenize";
 
     const tokenizer = new Tokenizer();
-    let fauxInput : HTMLDivElement;
+    let fauxInput : HTMLDivElement = $state();
     let realInput : HTMLInputElement;
-    let inputText = "";
+    let inputText = $state("");
 
     const units = ['tbs', 'tsp', 'oz'];
 
-    export let tokens : any[] = [];
+    interface Props {
+        tokens?: any[];
+        [key: string]: any
+    }
+
+    let { tokens = $bindable([]), ...rest }: Props = $props();
 
 
 
@@ -68,7 +73,7 @@
 
 </script>
 
-<div class="border-2 border-black" on:input={HandleInput} bind:this={fauxInput} {...$$restProps} contenteditable="true"></div>
+<div class="border-2 border-black" oninput={HandleInput} bind:this={fauxInput} {...rest} contenteditable="true"></div>
 
 <p>{inputText}</p>
 <p>

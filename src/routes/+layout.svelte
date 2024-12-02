@@ -1,6 +1,23 @@
 <script lang=ts>
     import PopUp from "$lib/Components/UI/PopUp/PopUp.svelte";
-import "../app.css"
+    import "../app.css"
+
+    import { page } from "$app/stores";
+    import { authState } from "$lib/stores";
+    import { goto } from "$app/navigation";
+	import { onMount } from "svelte";
+    
+
+    onMount(()=>{
+        page.subscribe(val=>{
+        if(!val?.url){
+            return
+        }
+        console.log(val.url.pathname)
+
+        })
+    })
+
     interface Props {
         children?: import('svelte').Snippet;
     }

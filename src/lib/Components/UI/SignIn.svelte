@@ -12,17 +12,16 @@
 
     const googleProvider = new GoogleAuthProvider();
 
-    console.log($authState);
+
 
     async function SignInGoogle(){
 
         try{
             const res = await signInWithPopup(fireAuth, googleProvider);
 
-            console.log(res);
-            console.log($authState)
+
         } catch (err){
-            console.log(err);
+
         }
     }
     function Logout(){

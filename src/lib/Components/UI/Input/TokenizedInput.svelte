@@ -3,7 +3,7 @@
     import { Tokenizer } from "./Tokenize";
 
     const tokenizer = new Tokenizer();
-    let fauxInput : HTMLDivElement = $state();
+    let fauxInput : HTMLDivElement | undefined = $state();
     let realInput : HTMLInputElement;
     let inputText = $state("");
 
@@ -19,6 +19,9 @@
 
 
     function HandleInput(e : Event){
+        if(!fauxInput){
+            return
+        }
 
         inputText = fauxInput.innerText;
         tokens = tokenizer.Parse(inputText);  
@@ -68,7 +71,9 @@
 
         })
 
-        fauxInput.innerHTML = outStrings.join(" ");
+        if(fauxInput){
+            fauxInput.innerHTML = outStrings.join(" ");
+        }
     }
 
 </script>

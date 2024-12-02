@@ -9,7 +9,7 @@
 
 <div class="flex justify-start w-full gap-2">
     <div class="px-2 hidden sm:block">
-        <a href="/New" class="bg-accent-1 px-3 py-2 rounded-xl text-white text-nowrap shadow-md">Create <SquarePen size={20} class="inline-block"/></a>
+        <a href="/Create" class="bg-accent-1 px-3 py-2 rounded-xl text-white text-nowrap shadow-md">Create <SquarePen size={20} class="inline-block"/></a>
         <nav class="py-4">
             <ul>
                 <li class="text-nowrap min-w-[10rem] my-1 px-2">
@@ -25,7 +25,7 @@
             </ul>
         </nav>
     </div>
-    <div class="w-full bg-white rounded-md p-3 min-h-[70svh] mr-5">
+    <div class="w-full bg-white rounded-md shadow-lg p-3 min-h-[70svh] mr-5">
         {@render children?.()}
     </div>
 </div>

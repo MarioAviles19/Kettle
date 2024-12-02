@@ -1,6 +1,7 @@
 <script lang=ts>
+
     import { List } from "./UI/List";
-    import { Text } from "lucide-svelte";
+    import { Text, Drumstick} from "lucide-svelte";
 	import type { Recipe } from "$lib/Zod";
     interface Props {
         data: Recipe[];
@@ -8,6 +9,8 @@
     }
 
     let { data, mode = "table" }: Props = $props();
+
+    console.log(data[0].modified)
 </script>
 
 
@@ -29,17 +32,17 @@
         <List.Item class="border-b border-soft-black hover:bg-[#f3f3f3] font-medium hidden sm:grid py-1">
 
             <div class="row-span-2 sm:hidden flex justify-center items-center ">
-                <Text class="mr-1 text-accent-1"/>
+                <Text class="mr-1 text-accent-1 opacity-65"/>
             </div>
             <List.Data class="w-full col-span-2 sm:col-auto">
                 <Text class="mr-1 text-accent-1 hidden sm:inline-block"/>
                 {recipe.name}
             </List.Data>
             <List.Data class="text-sm sm:text-base">
-                {recipe.name}
+                {new Date(recipe.modified?.seconds * 1000 || "").toLocaleDateString()}
             </List.Data>
             <List.Data class="text-sm sm:text-base">
-                {recipe.name}
+                {recipe.ownerID}
             </List.Data>
         </List.Item>
         <List.Item class="border-b border-soft-black hover:bg-[#f3f3f3] font-medium grid sm:hidden">
@@ -57,4 +60,10 @@
         </List.Item>
     </a>
     {/each}
+    {#if data.length == 0}
+        <div class="flex items-center justify-center">
+            <Drumstick/>
+        </div>
+    {/if}
+    
 </List.Root>

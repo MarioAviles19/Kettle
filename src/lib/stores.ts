@@ -16,7 +16,6 @@ export const authState : Writable<User|null> = writable(null);
 onAuthStateChanged(fireAuth, (user)=>{
 
     authState.set(user)
-    console.log(user);
 
 })
 
@@ -34,7 +33,7 @@ const storage = <T>(key: string, initValue: T): Writable<T> => {
             localStorage.removeItem(key)
         } else {
             localStorage.setItem(key, JSON.stringify(val))
-            console.log({val, str : JSON.stringify(val)})
+           
         }
    
     })
@@ -54,3 +53,5 @@ export const PersistantStorage = storage;
 
 
 export const RecipeCache = PersistantStorage<{[key : string] : Recipe}>("recipeCache", {})
+
+export const MousePosition = writable<{x : number, y : number}>({x : 0, y : 0})

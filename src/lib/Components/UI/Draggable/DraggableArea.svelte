@@ -1,7 +1,7 @@
 <script lang=ts>
 	import type { Draggable } from "$lib/types";
 
-    import { onDestroy, setContext } from "svelte";
+    import { onDestroy, setContext, type Snippet } from "svelte";
     import { key } from ".";
     import { writable } from "svelte/store";
 	import DraggableItemBuffer from "./DraggableItemBuffer.svelte";
@@ -17,7 +17,7 @@
 
     let dragItems : Array<{id: Symbol, data : any}> = [];
 
-    let activeItem = writable<{id: Symbol, data : any, height : number} | null>(null);
+    let activeItem = writable<{id: Symbol, data : any, height : number, contents : Snippet, offset : {x : number, y : number}} | null>(null);
 
     let mouseY = $state(0);
     let mouseX = $state(0);
@@ -25,7 +25,6 @@
     const GetCurrentDraggedItem = () => activeItem;
 
     const DropItem = (target : symbol)=>{
-        console.log({dragItems, each})
         const activeIndex = dragItems.findIndex(el=>{return el.id === $activeItem?.id})
         const targetIndex = dragItems.findIndex((el)=>{return el.id === target}) as number
         if(activeIndex !== -1 && targetIndex !== -1){
@@ -33,12 +32,14 @@
 
         const item = each[activeIndex];
         //Get rid of item being moved
-        each.splice(activeIndex, 1);
+        each[activeIndex] = null
         //Place it at the target index
         each.splice(targetIndex, 0, item)
-        each = each;
-        
-        console.log({each, targetIndex, activeIndex});
+        console.log(each)
+        each = each.filter(val=>{
+                return val
+        });
+        console.log(each)
         }
         activeItem.set(null)
     }
@@ -76,8 +77,7 @@
 
         dragItems.splice(index,1);
         dragItems = dragItems;
-        console.log(index);
-        console.log(each);
+
     }
  
     onDestroy(()=>{
@@ -94,11 +94,11 @@
         activeItem.set(null);
     }
     function DragEnd(e : Event){
-        console.log($activeItem)
         activeItem.set(null);
     }
-
-
+    activeItem.subscribe((el)=>{
+    })
+    
 </script>
 
 
@@ -111,9 +111,9 @@
     <DraggableItemBuffer class="min-h-[1.25rem]" />
 
     {#if $activeItem}
-    <div class="{$activeItem? "block" : "hidden"} bg-white fixed pointer-events-none border-2 border-black rounded-md font-bold px-2" style="top:{mouseY}px; left:{mouseX}px">
-        {$activeItem?.id?.description}
-    </div>
+        <div class="itemcontainer bg-white fixed pointer-events-none border-2 min-h-4 min-w-8 border-black rounded-md font-bold px-2 z-50" style="top:{(mouseY - (window?.scrollY ?? 0)) - $activeItem.offset.y}px; left:{mouseX - $activeItem.offset.x}px">
+            {@render $activeItem.contents()}
+        </div>
     {/if}
 </div>
 

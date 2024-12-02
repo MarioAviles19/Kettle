@@ -8,7 +8,8 @@ export default {
         'accent-1' : 'var(--color-accent-1)',
         'subtle-light' : "var(--color-subtle-light)",
         'soft-black' : "black",
-        'background-1' : 'white'
+        'background-1' : 'white',
+        'light-emphasis' : "var(--color-light-emphasis)"
       },
       
       

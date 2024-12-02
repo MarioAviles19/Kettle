@@ -6,6 +6,7 @@
 
     --color-accent-1 : rgb(255, 152, 43);
     --color-subtle-light : rgba(104, 104, 104, 0.499);
+    --color-light-emphasis : rgb(229, 229, 229);
 }
 
 ::selection {
@@ -19,14 +20,18 @@
   body{
     background-color: rgb(238, 238, 238);
   }
-  input{
+  input, textarea{
     border: 2px solid black;
     border-radius: .25rem;
     outline: none;
     transition: border-color 200ms ease;
   }
-  input:focus{
+  input:focus, textarea:focus{
     border-color: var(--color-accent-1);
+    outline:none;
+  }
+  textarea{
+    resize:none;
   }
 
   .quanitity{

@@ -13,7 +13,9 @@
     let input : HTMLInputElement;
 
     let inputElements : Array<HTMLTextAreaElement> = $state([]);
-
+    if(ingredients.length == 0){
+        ingredients.push("");
+    }
     function AddIngredient(){
         
             ingredients = [...ingredients, ""]
@@ -35,10 +37,16 @@
         ingredients = ingredients;
     }
     
-    
+    //TODO: Loop through all and remove empties instead of just when the empty one is
+    //Blurred
     function RemoveIfEmpty(index : number){
 
-   
+        if(inputElements.length <= 1 ){
+            return
+        }
+        if(!inputElements[index]){
+            return;
+        }
         if(inputElements[index].value == ""){
             ingredients.splice(index, 1);
             ingredients = ingredients;
@@ -71,7 +79,7 @@
 
 {:else}
 
-<div class="min-h-[25rem]">
+<div class="min-h-[10rem]">
     <ul class="list-disc pl-4">
         <Draggable.Area bind:each={ingredients}>
             {#each ingredients as ingredient, i}
@@ -80,7 +88,7 @@
             
                 <li class="my-1">
                     <div class="flex justify-left items-center w-full gap-1">
-                    <textarea rows={1} class="resize-none p-1 w-full inline h-auto" onfocusout={()=>{RemoveIfEmpty(i)}} oninput={ResizeToFit} onkeydown={HandleKeyboardInput} bind:this={inputElements[i]} bind:value={ingredients[i]}></textarea>
+                    <textarea rows={1} class="resize-none p-1 overflow-hidden w-full inline h-auto" onfocusout={()=>{RemoveIfEmpty(i)}} oninput={ResizeToFit} onkeydown={HandleKeyboardInput} bind:this={inputElements[i]} bind:value={ingredients[i]}></textarea>
                     <Draggable.Handle>
                         <div>
                             <GripHorizontal size={30}/>

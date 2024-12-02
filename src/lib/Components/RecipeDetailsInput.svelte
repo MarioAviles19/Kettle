@@ -1,6 +1,6 @@
 <script lang=ts>
     import { ResizeToFitInput } from "./Misc";
-    import type { Writable } from "svelte/store";
+    import { writable, type Writable } from "svelte/store";
 	import { ImageUpload } from "./UI/ImageUpload";
     
     import {Camera} from "lucide-svelte"
@@ -14,7 +14,7 @@
     }
 
     let {
-        image = $bindable(),
+        image = $bindable(writable(null)),
         name = $bindable(),
         description = $bindable(),
         notes = $bindable()
@@ -31,6 +31,7 @@
             target.style.height = target.scrollHeight + 'px';
         }
     }
+
     
 </script>
 
@@ -58,7 +59,7 @@
  
 
     <div class="my-2">   
-        <h3 class="text-xl font-bold">description</h3>
+        <h3 class="text-xl font-bold">Description</h3>
         <textarea oninput={ResizeToFit} bind:value={description} use:ResizeToFitInput class="border-2 border-black rounded w-full min-h-[5rem] p-1"></textarea>
     </div>
 

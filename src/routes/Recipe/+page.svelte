@@ -1,11 +1,19 @@
 <script lang=ts>
 
     import { RecipeCache } from "$lib/stores";
-
+    import IngredientDisplay from "$lib/Components/IngredientsParser/IngredientDisplay.svelte";
     import { page } from "$app/stores";
 	import { onMount } from "svelte";
+    import {ChevronLeft, EllipsisVertical, Share2, SquareX, User} from "lucide-svelte"
+    import { Modal } from "$lib/Components/UI/Modal";
+    import ManageAccess from "$lib/Components/ManageAccess.svelte";
+	import { PopOver } from "$lib/Components/UI/PopOver";
+	import Open from "$lib/Components/UI/PopOver/Open.svelte";
+	import Content from "$lib/Components/UI/PopOver/Content.svelte";
 
     let recipeID = $page.url.searchParams.get("r");
+
+
 
 
 
@@ -64,18 +72,41 @@
         notes : "I hope you enjoy!"
     }
 
+    let conversion = $state(1);
+    let shareMenuOpen = $state(false);
+
+    function OpenShareMenu(){
+        shareMenuOpen = true;
+    }
+
 </script>
 
-
+<a href="/Dashboard" class="max-w-[50rem] m-auto my-2 font-bold flex justify-start items-center"><ChevronLeft size={30}/>Dashboard</a>
 {#await GetRecipe(recipeID || "")}
     loading...
 {:then recipe} 
 <div class="max-w-[50rem] m-auto bg-white rounded-lg p-4 shadow-md">
     
-    <h2 class="text-2xl font-bold mb-7">{recipe.name}</h2>
-    <div class="flex">
-        <button>
-        </button>
+    <div class="mb-4">
+        <div class="flex justify-between">
+            <h2 class="text-2xl font-bold">{recipe.name}</h2>
+            <PopOver.Root>
+                <PopOver.Open><EllipsisVertical/></PopOver.Open>
+                <PopOver.Content>
+                    <button onclick={OpenShareMenu} class="flex justify-start items-center gap-4 px-3 my-2 hover:bg-light-emphasis font-bold"><Share2 size={20}/> <span>Share</span></button>
+                    <button class="flex justify-start items-center gap-4 px-3 hover:bg-light-emphasis font-bold text-red-900"><SquareX size={20}/> <span>Delete</span></button>
+                </PopOver.Content>
+            </PopOver.Root>
+
+        </div>
+        <p class="font-semibold">{recipe.description}</p>
+    </div>
+    <div class="flex gap-2">
+        <button class="border-2 border-accent-1 text-accent-1 font-bold rounded-md px-2 transition-all {conversion === .25? "activeConversion" : ""}" onclick={()=>{conversion = .25}}>.25x</button>
+        <button class="border-2 border-accent-1 text-accent-1 font-bold rounded-md px-2 transition-all {conversion === .5? "activeConversion" : ""}" onclick={()=>{conversion = .5}}>.5x</button>
+        <button class="border-2 border-accent-1 text-accent-1 font-bold rounded-md px-2 transition-all {conversion === 1? "activeConversion" : ""}" onclick={()=>{conversion = 1}}>1x</button>
+        <button class="border-2 border-accent-1 text-accent-1 font-bold rounded-md px-2 transition-all {conversion === 2? "activeConversion" : ""}" onclick={()=>{conversion = 2}}>2x</button>
+        <button class="border-2 border-accent-1 text-accent-1 font-bold rounded-md px-2 transition-all {conversion === 3? "activeConversion" : ""}" onclick={()=>{conversion = 3}}>3x</button>
     </div>
     
     <h3  class="text-xl font-bold">Ingredients</h3>
@@ -85,7 +116,7 @@
             
             <ul class="px-5 list-disc my-1">
                 {#each recipe.ingredients as ingredient}
-                    <li>{ingredient}</li>
+                    <li class="font-semibold"><IngredientDisplay text={ingredient} conversion={conversion}/></li>
                 {/each}
             </ul>
         </div>
@@ -98,8 +129,9 @@
     
             <li class="my-3">
                 <span class="rounded-full inline-flex justify-center items-center h-[2rem] w-[2rem] text-accent-1  border-accent-1 border-2 text-2xl mr-2">
-                    <span class="block">{i + 1}</span>
-                </span>{step}
+                    <span class="block font-semibold">{i + 1}</span>
+                </span>
+                <span class="font-semibold">{step}</span>
             </li>
     
         </ol>
@@ -114,7 +146,7 @@
 {/await}
 
 
-<div class="max-w-[50rem] m-auto">
+<div class="max-w-[50rem] m-auto hidden">
     
     <h2 class="text-xl font-bold mb-7">{mockRecipe.name}</h2>
     
@@ -164,3 +196,14 @@
         <p>{mockRecipe.notes}</p>
     {/if}
 </div>
+
+<Modal.Root open={shareMenuOpen}>
+    <ManageAccess/>
+</Modal.Root>
+
+<style>
+    .activeConversion{
+        color: white;
+        background-color: var(--color-accent-1);
+    }
+</style>

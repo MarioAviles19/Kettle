@@ -50,7 +50,7 @@
 {#if $authState}
     {#await GetRecipes()}
         loading
-    {:then recipes} 
+    {:then recipes}
         <RecipeList data={recipes}/>
     {/await}
 {/if}

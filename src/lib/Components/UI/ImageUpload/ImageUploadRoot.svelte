@@ -8,7 +8,7 @@
         children?: import('svelte').Snippet;
     }
 
-    let { imageData = writable<Blob | null>(null), children }: Props = $props();
+    let { imageData = $bindable(), children }: Props = $props();
     let imageURL = writable<string | null>(null);
 
     setContext(key, {

@@ -1,11 +1,24 @@
 
+interface Token{
+    text : string,
+    isQuantity? : boolean,
+    unit? : string,
+    isUnit? : boolean
+    isItem? : boolean,
+    isInterstitial? : boolean
+}
+export type Unit =
+            'tsp' | 'tsps' | 'tbsp' | 'tbsp' | 'tbs' | 'c' | 'cup' | 'cups' | 'ml' | 
+            'ml' | 'l' | 'l' | 'fl oz' | 'fl oz' | 'qt' | 'qts' | 'pt' | 
+            'pts' | 'gal' | 'gals' |
+            'g' | 'gs' | 'kg' | 'kgs' | 'oz' | 'ozs' | 'lb' | 'lbs' | 'mg' | 'mgs'
 
 export class Tokenizer{
 
 
     units = [
         // Volume
-        'tsp', 'tsps', 'tbsp', 'tbsp', 'tbs', 'cup', 'cups', 'ml', 
+        'tsp', 'tsps', 'tbsp', 'tbsp', 'tbs', 'c', 'cup', 'cups', 'ml', 
         'ml', 'l', 'l', 'fl oz', 'fl oz', 'qt', 'qts', 'pt', 
         'pts', 'gal', 'gals',
       
@@ -15,7 +28,7 @@ export class Tokenizer{
 
 
     Parse(str : string){
-        let tokens : any[] = [];
+        let tokens : Token[] = [];
         let currentToken = "";
 
         for (let i = 0; i < str.length; i++) {
@@ -26,10 +39,10 @@ export class Tokenizer{
             if(char.trim() === "" || i == str.length - 1){
 
                 if(currentToken.toString().toLowerCase() === "of"){
-                    if(!tokens.some(val=>{return val.interstitial == true})){
+                    if(!tokens.some(val=>{return val.isInterstitial == true})){
                         tokens.push({
                             text : currentToken,
-                            interstitial : true
+                            isInterstitial : true
                         })
                     } else {
                         tokens.push({
@@ -85,12 +98,10 @@ export class Tokenizer{
                     });
                 }
                 currentToken = ""
-                console.log({currentToken})
             }
 
             
         }
-        console.log(tokens)
         return tokens;
     }
 }

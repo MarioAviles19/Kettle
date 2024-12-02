@@ -7,9 +7,9 @@ export const RecipeSchema = z.object({
     description : z.string().optional(),
     notes : z.string().optional(),
     ingredients : z.string().array().nonempty(),
-    steps : z.string().array().nonempty(),
+    procedure : z.string().array().nonempty(),
 
 })
 
-export type Recipe = z.infer<typeof RecipeSchema>;
+export type Recipe = z.infer<typeof RecipeSchema> & {modified : {seconds : number}, id : string};
 

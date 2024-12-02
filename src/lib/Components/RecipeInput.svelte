@@ -1,13 +1,12 @@
 <script lang=ts>
-  import { run, createBubbler } from 'svelte/legacy';
+	import { writable } from 'svelte/store';
 
-  const bubble = createBubbler();
+
     import IngredientsInput from "./IngredientsInput.svelte";
     import ProcedureInput from "./ProcedureInput.svelte";
     import RecipeDetailsInput from "./RecipeDetailsInput.svelte";
-    import { scrollYPos } from "$lib/stores";
-	import AutoComplete from "./AutoComplete.svelte";
     import { CookingPot, Text, Carrot} from "lucide-svelte"
+
     
 
     let ingredientsList : Array<string> = $state([]);
@@ -15,7 +14,6 @@
 
 
     function AttatchObserver(el : HTMLElement, callback : IntersectionObserverCallback){
-
         const intersectionOpts : IntersectionObserverInit = {
         rootMargin: "0px 0px -50% 0px",
         }
@@ -32,42 +30,34 @@
     }
 
     let currentStep = 1;
-    
-    let image : any = $state();
-    let name = $state("Untitled");
-    let description = $state("");
-    let notes = $state("");
-    let procedure : Array<string> = $state([""]);
 
   interface Props {
-    recipe?: any;
+        description? : string,
+        name? : string,
+        notes? : string,
+        procedure? : string[],
+        image? : any,
+        ingredients? : string[],
+        onsubmit : any
   }
 
-  let { recipe = $bindable({
-        image,
-        name,
-        description,
-        notes,
-        procedure
-    }) }: Props = $props();
+  let {
+        image = $bindable(writable(null)),
+        name = $bindable(""),
+        description = $bindable(""),
+        notes = $bindable(""),
+        procedure = $bindable([]),
+        ingredients = $bindable([]),
+        onsubmit
+}: Props = $props();
 
-    run(() => {
-    recipe = {
-          image : $image,
-          name,
-          description,
-          notes,
-          procedure,
-          ingredients: ingredientsList
-      };
-  });
 
 </script>
 
-<form onsubmit={bubble('submit')} class="w-full max-w-[40rem] m-auto mb-[10rem] bg-white p-4">
+<form onsubmit={onsubmit} class="w-full max-w-[40rem] m-auto mb-[10rem]">
   
     
-        <div id="detail" class="composeStep my-4  p-1 min-h-[25rem]  ">
+        <div id="detail" class="composeStep my-4  p-2 min-h-[25rem] mb-2 rounded-md shadow-md bg-white">
             
 
             
@@ -79,18 +69,18 @@
             </div>
 
         </div>
-        <div id="ingredients" class="composeStep my-4  p-1 min-h-[25rem]  ">
+        <div id="ingredients" class="composeStep my-4  p-2 min-h-[25rem] mb-2 rounded-md shadow-md bg-white">
 
 
             <div class="my-4">
                 <h3 class="text-xl font-bold">Ingredients</h3>
                 <div class="my-2">
-                    <IngredientsInput bind:ingredients={ingredientsList}/>
+                    <IngredientsInput bind:ingredients/>
                 </div>
             </div>
         </div>
 
-        <div id="procedure" class="composeStep my-4  p-1 min-h-[9rem]  ">
+        <div id="procedure" class="composeStep my-4  p-2 min-h-[9rem] mb-2 rounded-md shadow-md bg-white">
 
 
             <div>
@@ -106,12 +96,14 @@
 <div class="fixed bottom-8 w-full">
     <div class="flex justify-around items-center px-[2rem] w-[90%] min-w-[16rem] max-w-[30rem]  m-auto">
         <a href="#detail"  class="mx-[2px] block p-3 transition-all duration-300 rounded-full outline outline-2 outline-accent-1  {name? "bg-accent-1 text-white" : "bg-white text-accent-1"}" type="button"><Text size={30}/></a>
-        <div aria-hidden="true" class="h-1 transition-all duration-300 w-full grow {ingredientsList[0]? "bg-accent-1" : "bg-[#d1d1d1]"}"></div>
-        <a href="#ingredients" class=" mx-[2px] block p-3 transition-all duration-300 rounded-full outline outline-2 outline-accent-1  {ingredientsList[0]? "bg-accent-1 text-white" : "bg-white text-accent-1"}" type="button"><Carrot size={30}/></a>
+        <div aria-hidden="true" class="h-1 transition-all duration-300 w-full grow {ingredients[0]? "bg-accent-1" : "bg-[#d1d1d1]"}"></div>
+        <a href="#ingredients" class=" mx-[2px] block p-3 transition-all duration-300 rounded-full outline outline-2 outline-accent-1  {ingredients[0]? "bg-accent-1 text-white" : "bg-white text-accent-1"}" type="button"><Carrot size={30}/></a>
         <div aria-hidden="true" class="h-1 w-full transition-all duration-300 grow {procedure[0]? "bg-accent-1" : "bg-[#d1d1d1]"}"></div>
         <a href="#procedure" class="mx-[2px] block p-3 transition-all duration-300 rounded-full outline outline-2 outline-accent-1 {procedure[0]? "bg-accent-1 text-white" : "bg-white text-accent-1"}" type="button"><CookingPot size={30}/></a>
     </div>
 </div>
+
+
 
 
 <style>

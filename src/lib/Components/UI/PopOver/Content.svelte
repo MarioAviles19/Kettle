@@ -5,7 +5,7 @@
 
     const { GetPopOver } = getContext(ctx) as any
 
-    const { children } = $props()
+    const { children, ...restProps} = $props()
 
     const pop = GetPopOver();
 
@@ -23,7 +23,7 @@
 </script>
 
 {#if pop.isOpen}
-    <div in:slide out:slide bind:this={popEl}  class="absolute top-0 bg-white shadow-2xl rounded-md p-2 text-nowrap" style={isRight? "right: 0" : "left: 0"}>
+    <div in:slide out:slide bind:this={popEl}  class="absolute top-0  {restProps.class}" style={isRight? "right: 0" : "left: 0"}>
         {@render children()}
     </div>
 {/if}

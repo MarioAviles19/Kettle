@@ -11,6 +11,13 @@ export default {
         'background-1' : 'white',
         'light-emphasis' : "var(--color-light-emphasis)"
       },
+      screens: {
+        'print': {'raw': 'print'},
+        // => @media  print { ... }
+      },
+      boxShadow: {
+        'border' : '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1), 0 -1px 3px 0 rgb(0 0 0 / 0.1), 0 -1px 2px -1px rgb(0 0 0 / 0.1)'
+      }
       
       
     },

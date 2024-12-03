@@ -2,7 +2,7 @@
     import { setContext } from "svelte";
     import { ctx } from ".";
 	import { writable } from "svelte/store";
-    let { children, open = $bindable(false) } = $props()
+    let { children, open = $bindable(false), ...restProps} = $props()
 
     setContext(ctx, {
         GetPopOver
@@ -26,4 +26,4 @@
     }
 </script>
 
-<div class="relative w-min h-min overflow-visible" onpointerleave={Close}>{@render children()}</div>
+<div class="relative w-min h-min overflow-visible {restProps.class}" onpointerleave={Close}>{@render children()}</div>

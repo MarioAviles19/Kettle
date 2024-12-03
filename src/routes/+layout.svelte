@@ -27,7 +27,7 @@
 
 <header class="flex justify-between items-center p-2">
     <h1 class="font-bold text-xl text-accent-1">Kettle</h1>
-    <nav>
+    <nav class="print:hidden">
         <ul class="flex gap-4">
             <li>
                 <a href="/Dashboard">Dashboard</a>

@@ -3,6 +3,9 @@
     import { List } from "./UI/List";
     import { Text, Drumstick} from "lucide-svelte";
 	import type { Recipe } from "$lib/Zod";
+    import { authState, usersStore } from "$lib/stores";
+
+
     interface Props {
         data: Recipe[];
         mode?: "table" | "blocks";
@@ -42,7 +45,7 @@
                 {new Date(recipe.modified?.seconds * 1000 || "").toLocaleDateString()}
             </List.Data>
             <List.Data class="text-sm sm:text-base">
-                {recipe.ownerID}
+                {recipe.ownerID == $authState?.uid? "You" : $usersStore[recipe.ownerID].displayName || "Unknown"}
             </List.Data>
         </List.Item>
         <List.Item class="border-b border-soft-black hover:bg-[#f3f3f3] font-medium grid sm:hidden">

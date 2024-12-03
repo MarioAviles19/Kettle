@@ -11,5 +11,6 @@ export const RecipeSchema = z.object({
 
 })
 
-export type Recipe = z.infer<typeof RecipeSchema> & {modified : {seconds : number}, id : string};
+export type Recipe = z.infer<typeof RecipeSchema> & {modified : {seconds : number}, id : string, ownerDoc? : UserDoc};
 
+export type UserDoc = {displayName : string, email : string, photoURL? : string}

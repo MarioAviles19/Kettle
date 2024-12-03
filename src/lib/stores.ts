@@ -3,7 +3,9 @@ import {fireAuth} from "$lib/Firebase"
 import { writable, type Writable, get} from "svelte/store";
 import type { User } from "firebase/auth";
 import { browser } from "$app/environment";
-import type { Recipe } from "./Zod";
+import type { Recipe, UserDoc } from "./Zod";
+import { firestore } from "$lib/Firebase";
+import { getDoc, doc, setDoc } from "firebase/firestore";
 
 
 
@@ -15,14 +17,39 @@ export const authState : Writable<User|null> = writable(null);
 
 onAuthStateChanged(fireAuth, (user)=>{
 
+    if(user){
+        AddUserDocIfNoneExists(user.uid, user.displayName, user.email, user.photoURL)
+    }
+    console.log(user)
     authState.set(user)
 
+    
 })
 
+async function AddUserDocIfNoneExists(userID : string, displayName : string | null, email : string | null, photoURL : string | null){
+    const docRef = doc(firestore, "Users", userID)
+    const docSnap = await getDoc(docRef)
 
-const storage = <T>(key: string, initValue: T): Writable<T> => {
+    if(docSnap.exists()){
+    } else{
+        //Create the document if none exists
+        const result = await setDoc(docRef, {
+            displayName,
+            email,
+            photoURL
+        })
+    }
+}
+export const usersStore = writable<{[key : string] : UserDoc}>({})
+
+
+const storage = <T>(key: string, initValue: T): Writable<T> & {Invalidate : ()=>void} => {
     const store = writable(initValue);
-    if (!browser) return store;
+    const Invalidate = ()=>{
+        if(!browser) return;
+        localStorage.removeItem(key)
+    }
+    if (!browser) return {...store, Invalidate};
 
     const storedValueStr = localStorage.getItem(key);
     if (storedValueStr != null) store.set(JSON.parse(storedValueStr));
@@ -46,7 +73,9 @@ const storage = <T>(key: string, initValue: T): Writable<T> => {
         if (localValue !== get(store)) store.set(localValue);
     });
 
-    return store;
+
+
+    return {...store, Invalidate};
 }
 
 export const PersistantStorage = storage;

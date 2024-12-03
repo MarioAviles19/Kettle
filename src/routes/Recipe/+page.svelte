@@ -4,17 +4,40 @@
     import IngredientDisplay from "$lib/Components/IngredientsParser/IngredientDisplay.svelte";
     import { page } from "$app/stores";
 	import { onMount } from "svelte";
-    import {ChevronLeft, EllipsisVertical, Share2, SquareX, User} from "lucide-svelte"
+    import {ChevronLeft, EllipsisVertical, Share2, SquareX, Printer} from "lucide-svelte"
     import { Modal } from "$lib/Components/UI/Modal";
     import ManageAccess from "$lib/Components/ManageAccess.svelte";
 	import { PopOver } from "$lib/Components/UI/PopOver";
 	import Open from "$lib/Components/UI/PopOver/Open.svelte";
 	import Content from "$lib/Components/UI/PopOver/Content.svelte";
+	import { DeleteDocByID } from "$lib/Firebase/recipes";
+	import ConfirmationModal from "$lib/Components/ConfirmationModal.svelte";
+	import { goto } from "$app/navigation";
 
     let recipeID = $page.url.searchParams.get("r");
 
+    let confirmationProps = $state({text : "", onConfirm : ()=>{}, onCancel : ()=>{}});
+    let confirmationBoxOpen = $state(false);
 
+    function DeleteRecipe(){
+        console.log("deleting")
+        if(!recipeID) return;
+        DeleteDocByID("TestRecipes/", recipeID).then(val=>{
+            goto("/Dashboard")
+            
+        }).catch(err=>{console.log(err)})
+        RecipeCache.Invalidate()
 
+    }
+    function OpenConfirmation(){
+        confirmationProps = {
+            text : "Are you sure you want to delete this recipe?",
+            onConfirm : ()=>{DeleteRecipe()},
+            onCancel : ()=>{console.log("Cancel")},
+        }
+        confirmationBoxOpen = true;
+
+    }
 
 
     onMount(()=>{
@@ -78,30 +101,37 @@
     function OpenShareMenu(){
         shareMenuOpen = true;
     }
+    function PrintRecipe(){
+        window.print();
+    }
 
 </script>
 
-<a href="/Dashboard" class="max-w-[50rem] m-auto my-2 font-bold flex justify-start items-center"><ChevronLeft size={30}/>Dashboard</a>
+<a href="/Dashboard" class="max-w-[50rem] m-auto my-2 font-bold flex justify-start items-center print:hidden"><ChevronLeft size={30}/>Dashboard</a>
 {#await GetRecipe(recipeID || "")}
     loading...
 {:then recipe} 
-<div class="max-w-[50rem] m-auto bg-white rounded-lg p-4 shadow-md">
+<div class="max-w-[50rem] m-auto bg-white rounded-lg p-4 shadow-md print:shadow-none">
     
     <div class="mb-4">
         <div class="flex justify-between">
             <h2 class="text-2xl font-bold">{recipe.name}</h2>
-            <PopOver.Root>
-                <PopOver.Open><EllipsisVertical/></PopOver.Open>
-                <PopOver.Content>
-                    <button onclick={OpenShareMenu} class="flex justify-start items-center gap-4 px-3 my-2 hover:bg-light-emphasis font-bold"><Share2 size={20}/> <span>Share</span></button>
-                    <button class="flex justify-start items-center gap-4 px-3 hover:bg-light-emphasis font-bold text-red-900"><SquareX size={20}/> <span>Delete</span></button>
+            <PopOver.Root class="print:hidden">
+                <PopOver.Open class="hover:bg-light-emphasis transition-all rounded-full"><EllipsisVertical/></PopOver.Open>
+                <PopOver.Content class="bg-white shadow-border rounded-md p-1 text-nowrap min-w-[10rem]">
+                    <button onclick={PrintRecipe} class="transition-all px-1 w-full flex justify-start items-center gap-4 my-2 hover:bg-light-emphasis font-bold"><Printer size={20}/> <span>Print</span></button>
+                    <button onclick={OpenShareMenu} class="transition-all px-1 w-full flex justify-start items-center gap-4 my-2 hover:bg-light-emphasis font-bold"><Share2 size={20}/> <span>Share</span></button>
+                    <button onclick={OpenConfirmation} class="transition-all px-1 w-full flex justify-start items-center gap-4 hover:bg-light-emphasis font-bold text-red-900"><SquareX size={20}/> <span>Delete</span></button>
                 </PopOver.Content>
             </PopOver.Root>
 
         </div>
+        {#if recipe?.modified?.seconds}
+            <p class="font-semibold text-xs">Updated {new Date(recipe.modified.seconds * 1000).toLocaleString()}</p>
+        {/if}
         <p class="font-semibold">{recipe.description}</p>
     </div>
-    <div class="flex gap-2">
+    <div class="flex gap-2 print:hidden">
         <button class="border-2 border-accent-1 text-accent-1 font-bold rounded-md px-2 transition-all {conversion === .25? "activeConversion" : ""}" onclick={()=>{conversion = .25}}>.25x</button>
         <button class="border-2 border-accent-1 text-accent-1 font-bold rounded-md px-2 transition-all {conversion === .5? "activeConversion" : ""}" onclick={()=>{conversion = .5}}>.5x</button>
         <button class="border-2 border-accent-1 text-accent-1 font-bold rounded-md px-2 transition-all {conversion === 1? "activeConversion" : ""}" onclick={()=>{conversion = 1}}>1x</button>
@@ -128,8 +158,8 @@
         <ol class="px-5 my-1">
     
             <li class="my-3">
-                <span class="rounded-full inline-flex justify-center items-center h-[2rem] w-[2rem] text-accent-1  border-accent-1 border-2 text-2xl mr-2">
-                    <span class="block font-semibold">{i + 1}</span>
+                <span class="rounded-full inline-flex justify-center items-center h-[2rem] w-[2rem] text-white bg-accent-1  border-accent-1  border-2 text-2xl mr-2">
+                    <span class="block text-lg font-semibold">{i + 1}</span>
                 </span>
                 <span class="font-semibold">{step}</span>
             </li>
@@ -200,6 +230,8 @@
 <Modal.Root open={shareMenuOpen}>
     <ManageAccess/>
 </Modal.Root>
+
+<ConfirmationModal bind:open={confirmationBoxOpen} data={confirmationProps} />
 
 <style>
     .activeConversion{

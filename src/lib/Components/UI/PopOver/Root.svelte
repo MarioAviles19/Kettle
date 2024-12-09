@@ -22,8 +22,7 @@
     }
     function Open(){
         open = true
-        console.log({open})
     }
 </script>
 
-<div class="relative w-min h-min overflow-visible {restProps.class}" onpointerleave={Close}>{@render children()}</div>
+<div role="menu" tabindex="0" class="relative w-min h-min overflow-visible {restProps.class}" onmouseleave={Close}>{@render children()}</div>

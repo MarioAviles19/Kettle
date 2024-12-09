@@ -6,10 +6,15 @@
     import ProcedureInput from "./ProcedureInput.svelte";
     import RecipeDetailsInput from "./RecipeDetailsInput.svelte";
     import { CookingPot, Text, Carrot} from "lucide-svelte"
+    import Sticky from './UI/Sticky.svelte';
 
     
 
     let ingredientsList : Array<string> = $state([]);
+
+    //TODO: Add fields for total time (Prep and cook)
+    //TODO: Add number of Servings
+    //TODO: Add equipment
 
 
 
@@ -38,7 +43,8 @@
         procedure? : string[],
         image? : any,
         ingredients? : string[],
-        onsubmit : any
+        onsubmit : any,
+        oncancel? : any
   }
 
   let {
@@ -48,17 +54,24 @@
         notes = $bindable(""),
         procedure = $bindable([]),
         ingredients = $bindable([]),
-        onsubmit
+        onsubmit,
+        oncancel
 }: Props = $props();
 
 
 </script>
 
-<form onsubmit={onsubmit} class="w-full max-w-[40rem] m-auto mb-[10rem]">
+<form onsubmit={onsubmit} class="w-full max-w-clamp-sm m-auto mb-[10rem]">
   
+
     
         <div id="detail" class="composeStep my-4  p-2 min-h-[25rem] mb-2 rounded-md shadow-md bg-white">
-            
+            <Sticky class="max-w-clamp-sm m-auto mt-4">
+                <div class="flex justify-end items-center gap-2">
+                    <button onclick={oncancel} type="button" class="bg-white shadow-md text-accent-1 text-xl rounded-md px-2 py-1 block font-bold">Cancel</button>
+                    <button class="bg-accent-1 shadow-md text-white text-xl rounded-md px-2 py-1 block font-bold">Save</button>
+                </div>
+            </Sticky>
 
             
             <div >
@@ -87,7 +100,6 @@
                 <h3 class="text-xl font-bold">Instructions</h3>
                 <ProcedureInput bind:steps={procedure}/>
 
-                <button class="bg-accent-1 my-4 text-white text-xl rounded-md m-auto px-4 py-1 block font-bold">Save</button>
             </div>
             
         </div>

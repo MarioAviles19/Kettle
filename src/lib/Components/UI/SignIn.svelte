@@ -5,8 +5,6 @@
     import {GoogleAuthProvider, signInWithPopup, signInWithRedirect, signOut, getRedirectResult} from "firebase/auth";
     import {} from "lucide-svelte"
     import { fireAuth } from "$lib/Firebase";
-	import { authState } from "$lib/stores";
-    /** @type {{[key: string]: any}} */
     let { ...rest } = $props();
 
 

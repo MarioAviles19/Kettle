@@ -8,9 +8,12 @@ export const RecipeSchema = z.object({
     notes : z.string().optional(),
     ingredients : z.string().array().nonempty(),
     procedure : z.string().array().nonempty(),
+    cookTimeMinutes : z.number().optional(),
+    numberServings : z.number().optional(),
+    linkPublic : z.boolean()
 
 })
 
 export type Recipe = z.infer<typeof RecipeSchema> & {modified : {seconds : number}, id : string, ownerDoc? : UserDoc};
 
-export type UserDoc = {displayName : string, email : string, photoURL? : string}
+export type UserDoc = {displayName : string, email : string, photoURL? : string | null}

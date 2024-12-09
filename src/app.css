@@ -6,7 +6,11 @@
 
     --color-accent-1 : rgb(255, 152, 43);
     --color-subtle-light : rgba(104, 104, 104, 0.499);
+    --color-subtle-light-hard : rgb(170, 170, 170);
     --color-light-emphasis : rgb(229, 229, 229);
+
+    --color-skeleton-start : rgba(213, 213, 213, 0.395);
+    --color-skeleton-end : rgba(206, 206, 206, 0.84);
 }
 
 ::selection {
@@ -22,6 +26,10 @@
     -webkit-print-color-adjust:exact !important;
     print-color-adjust:exact !important;
   }
+  input::placeholder{
+    color: var(--color-subtle-light);
+    
+  }
   input, textarea{
     border: 2px solid black;
     border-radius: .25rem;
@@ -34,6 +42,9 @@
   }
   textarea{
     resize:none;
+  }
+  button:focus, button:hover{
+    
   }
 
   .quanitity{

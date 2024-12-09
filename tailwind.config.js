@@ -9,7 +9,8 @@ export default {
         'subtle-light' : "var(--color-subtle-light)",
         'soft-black' : "black",
         'background-1' : 'white',
-        'light-emphasis' : "var(--color-light-emphasis)"
+        'light-emphasis' : "var(--color-light-emphasis)",
+        'subtle-light-hard' : "var(--color-subtle-light-hard)",
       },
       screens: {
         'print': {'raw': 'print'},
@@ -17,6 +18,12 @@ export default {
       },
       boxShadow: {
         'border' : '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1), 0 -1px 3px 0 rgb(0 0 0 / 0.1), 0 -1px 2px -1px rgb(0 0 0 / 0.1)'
+      },
+      width: {
+        "clamp-sm" : "50rem"
+      },
+      maxWidth: {
+        "clamp-sm" : "50rem"
       }
       
       

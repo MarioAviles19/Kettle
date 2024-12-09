@@ -6,11 +6,11 @@
    import PopUp from "$lib/Components/UI/PopUp/PopUp.svelte";
    import RecipeInput from "$lib/Components/RecipeInput.svelte";
    import Form from "$lib/Components/Form.svelte";
+   import { ChevronLeft } from "lucide-svelte";
 
     
 
  async function UploadRecipe(e : SubmitEvent){
-   console.log("meow")
     e.preventDefault();
     const ref = collection(firestore, "TestRecipes/");
     const payload = {...recipe, ownerID : $authState?.uid}
@@ -57,6 +57,7 @@
       } | undefined = $derived({name, description, procedure, ingredients, notes})
 
 </script>
+<a href="/Dashboard" class="max-w-[50rem] m-auto my-2 font-bold flex justify-start items-center print:hidden"><ChevronLeft size={30}/>Dashboard</a>
 
 <RecipeInput onsubmit={UploadRecipe} bind:name bind:description bind:notes bind:procedure bind:ingredients bind:image/>
 

@@ -10,5 +10,13 @@ export const ResizeToFitInput = (e : HTMLElement)=>{
             target.style.height = "auto"
             target.style.height = target.scrollHeight + 'px';
         }
-        }
+    }
+}
+
+export function ConvertMinutesToTime(minutes : number){
+
+    const numHours = Math.floor(minutes / 60)
+    const numMinutes = minutes - (numHours * 60)
+
+    return `${numHours > 0? numHours + "hr": ""} ${numMinutes}min`
 }

@@ -13,7 +13,6 @@
         if(!val?.url){
             return
         }
-        console.log(val.url.pathname)
 
         })
     })
@@ -42,7 +41,7 @@
     </nav>
 </header>
 
-<main class="p-2">
+<main class="sm:p-2">
     {@render children?.()}
 
     <PopUp/>

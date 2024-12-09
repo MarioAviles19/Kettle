@@ -20,7 +20,6 @@ onAuthStateChanged(fireAuth, (user)=>{
     if(user){
         AddUserDocIfNoneExists(user.uid, user.displayName, user.email, user.photoURL)
     }
-    console.log(user)
     authState.set(user)
 
     

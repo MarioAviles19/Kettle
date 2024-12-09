@@ -13,7 +13,7 @@
         },
         testFunc? : ()=>void
     }
-    let { open = $bindable(false), data, testFunc = ()=>{console.log("test worked")}} : Props = $props()
+    let { open = $bindable(false), data } : Props = $props()
 </script>
 
 <Modal.Root open={open}>
@@ -24,7 +24,7 @@
 
         <div class="flex justify-between">
             <button class="px-2 py-1 font-semibold rounded-md shadow-md bg-soft-black text-white" onclick={()=>{data.onConfirm(); open = false}} type="button">Confirm</button>
-            <button class="px-2 py-1 font-semibold rounded-md shadow-md border-soft-black border-2" onclick={()=>{data.onCancel(); open = false}} type="button">Cancel</button>
+            <button class="px-2 py-1 font-semibold rounded-md shadow-md outline-2 outline-soft-black outline" onclick={()=>{data.onCancel(); open = false}} type="button">Cancel</button>
         </div>
     </div>
 </Modal.Root>

@@ -13,7 +13,6 @@
   
     let isRight = $state(false);
     $effect(()=>{
-        console.log(pop.isOpen)
         
         const halfWayPoint = window?.innerWidth / 2;
         isRight = ((popEl?.getBoundingClientRect()?.right || 0) > halfWayPoint);

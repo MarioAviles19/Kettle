@@ -13,14 +13,14 @@
         <nav class="py-4">
             <ul>
                 <li class="text-nowrap min-w-[10rem] my-1 px-2">
-                    <button class="w-full hover:bg-[#cdcdcd] rounded-xl px-2 py-1 text-left">
+                    <a href="/Dashboard" class="w-full hover:bg-[#cdcdcd] rounded-xl px-2 py-1 text-left">
                         <Folder size={20} class="inline"/> My Recipes
-                    </button>
+                    </a>
                 </li>
                 <li class="text-nowrap min-w-[10rem] my-1 px-2">
-                    <button class="w-full hover:bg-[#cdcdcd] rounded-xl px-2 py-1 text-left">
+                    <a href="/Dashboard/Shared" class="w-full hover:bg-[#cdcdcd] rounded-xl px-2 py-1 text-left">
                         <Users size={20} class="inline"/> Shared Recipes
-                    </button>
+                    </a>
                 </li>
             </ul>
         </nav>

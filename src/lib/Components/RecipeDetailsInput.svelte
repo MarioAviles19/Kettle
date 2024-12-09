@@ -41,7 +41,7 @@
         <input  type="text" class="border-black border-2 rounded w-full p-1" bind:value={name}/>
     </div>
     
-    <div class="my-2">
+    <div class="my-2 hidden">
         <h3 class="text-xl font-bold">Image (Optional)</h3>
         <ImageUpload.Root bind:imageData={image}>
             <ImageUpload.Input class="block">

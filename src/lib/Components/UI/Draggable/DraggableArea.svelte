@@ -19,6 +19,7 @@
 
     let activeItem = writable<{id: Symbol, data : any, height : number, contents : Snippet, offset : {x : number, y : number}} | null>(null);
 
+    let area : HTMLDivElement | undefined = $state();
     let mouseY = $state(0);
     let mouseX = $state(0);
 
@@ -35,11 +36,10 @@
         each[activeIndex] = null
         //Place it at the target index
         each.splice(targetIndex, 0, item)
-        console.log(each)
+
         each = each.filter(val=>{
                 return val
         });
-        console.log(each)
         }
         activeItem.set(null)
     }
@@ -84,13 +84,17 @@
         dragItems = [];
     })
     function CaptureMouseMovement(e : Event | any){
-        mouseX = e.pageX;
-        mouseY = e.pageY;
+        if(!area){
+            return;
+        }
+        const rect = area.getBoundingClientRect();
+        mouseX = e.pageX - rect.left;
+        mouseY = e.pageY - rect.top;
+        console.log(e);
         
     }
     function CancelDrag(e: Event){
-        console.log("cancel")
-        console.log(e.target)
+
         activeItem.set(null);
     }
     function DragEnd(e : Event){
@@ -104,14 +108,14 @@
 
 
 
-<div role="list" onpointermove={CaptureMouseMovement} onpointerdown={CaptureMouseMovement} onpointerup={DragEnd}  class="p-1 touch-none" >
+<div role="list" bind:this={area} onpointermove={CaptureMouseMovement} onpointerdown={CaptureMouseMovement} onpointerup={DragEnd}  class="p-1 touch-none relative" >
 
     {@render children?.()}
 
     <DraggableItemBuffer class="min-h-[1.25rem]" />
 
     {#if $activeItem}
-        <div class="itemcontainer bg-white fixed pointer-events-none border-2 min-h-4 min-w-8 border-black rounded-md font-bold px-2 z-50" style="top:{(mouseY - (window?.scrollY ?? 0)) - $activeItem.offset.y}px; left:{mouseX - $activeItem.offset.x}px">
+        <div class="itemcontainer bg-white absolute w-full pointer-events-none border-2 min-h-4 min-w-8 border-black rounded-md font-bold px-2 z-50" style="top:{(mouseY - (window?.scrollY ?? 0)) - $activeItem.offset.y}px; left:{mouseX - $activeItem.offset.x}px">
             {@render $activeItem.contents()}
         </div>
     {/if}

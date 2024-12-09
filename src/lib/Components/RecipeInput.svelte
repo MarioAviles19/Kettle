@@ -66,7 +66,7 @@
 
     
         <div id="detail" class="composeStep my-4  p-2 min-h-[25rem] mb-2 rounded-md shadow-md bg-white">
-            <Sticky class="max-w-clamp-sm m-auto mt-4">
+            <Sticky class="max-w-clamp-sm m-auto mt-4 p-2">
                 <div class="flex justify-end items-center gap-2">
                     <button onclick={oncancel} type="button" class="bg-white shadow-md text-accent-1 text-xl rounded-md px-2 py-1 block font-bold">Cancel</button>
                     <button class="bg-accent-1 shadow-md text-white text-xl rounded-md px-2 py-1 block font-bold">Save</button>

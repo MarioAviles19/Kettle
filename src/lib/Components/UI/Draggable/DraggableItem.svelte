@@ -56,7 +56,6 @@ function HandleDragEnter(e : PointerEvent | any){
     x = e.clientX - rect[0].left;
     y = e.clientY - rect[0].top;
     }
-    console.log({x, y, rect, e})
 
 
 
@@ -85,16 +84,16 @@ items.push({id: symbol, data : {}})
 </script>
 
 {#snippet item()}
-<div class={$activeItem?.id == symbol? "hidden" : ""}>
+<div class="{$activeItem?.id == symbol? "hidden" : ""}" style={$activeItem? "user-select: none" : ""}>
     {@render children?.()}
 </div>
 {/snippet}
 
-<div bind:clientHeight={height} bind:this={itemArea} onpointerup={PointerUp} onpointerenter={PointerEnter} onpointerleave={PointerLeave} role="listitem" style="{$activeItem === symbol? "opacity: 0" : ""}" class="dragItem" >
+<div bind:clientHeight={height} bind:this={itemArea} onpointerup={PointerUp} onpointerenter={PointerEnter} onpointerleave={PointerLeave} role="listitem" style="{$activeItem === symbol? "opacity: 0" : ""};" class="dragItem"  >
    
-    {#if draggingOver}
+    {#if draggingOver && $activeItem}
         <div class="w-full rounded-md border-accent-1 border-dotted border-4" style="height : {$activeItem?.height | 0}px">
-            
+            <div class="hidden pointer-events-none">{@render item()}</div>
         </div>
     {/if}
     

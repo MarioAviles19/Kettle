@@ -39,7 +39,6 @@
             return;
         }
         StyleText(inputText);
-        console.log({cursorPosition, len : el.childNodes.length})
         const range = document.createRange();
         const selection = window.getSelection();
         range.setStart(el, el.childNodes.length);
@@ -58,14 +57,11 @@
             
             const word = str.trim().toLowerCase();
             let num = parseInt(word);
-            console.log(word)
 
             if(num){
                 str = `<span class="quantity">${str}</span>`
-                console.log(word);
             } else if(units.some((val)=>{return val === word})){
                 str = `<span class="unit">${str}</span>`
-                console.log(str)
             }
             outStrings.push(str)
 

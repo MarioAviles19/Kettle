@@ -1,15 +1,15 @@
-<script>
+<script lang=ts>
     import { createBubbler, preventDefault } from 'svelte/legacy';
 
     const bubble = createBubbler();
-    import {GoogleAuthProvider, signInWithPopup, signInWithRedirect, signOut, getRedirectResult} from "firebase/auth";
-    import {} from "lucide-svelte"
+    import { signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
     import { fireAuth } from "$lib/Firebase";
+	import { authState } from '$lib/stores';
+	import type { FormEventHandler } from 'svelte/elements';
     let { ...rest } = $props();
 
 
     const googleProvider = new GoogleAuthProvider();
-
 
 
     async function SignInGoogle(){
@@ -19,14 +19,24 @@
 
 
         } catch (err){
-
+            
         }
     }
     function Logout(){
         signOut(fireAuth)
     }
 
-    let showPassword = false;
+    async function LoginWithEmailAndPassword(e : InputEvent){
+        e.preventDefault()
+        try{
+            const res = await signInWithEmailAndPassword(fireAuth, email, password)
+            console.log($authState)
+        } catch(e){
+            console.log(e)
+        }
+    }
+
+    let showPassword = $state(false);
 
     let email = $state("");
     let password = $state("");
@@ -44,7 +54,7 @@
 
     <p class="text-center">or</p>
     
-    <form onsubmit={preventDefault(bubble('submit'))} class="w-full">
+    <form onsubmit={LoginWithEmailAndPassword} class="w-full">
         <label class="block text-xs" for="email">
             Email
         </label>

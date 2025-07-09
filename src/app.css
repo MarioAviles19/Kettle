@@ -2,15 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
+@theme{
+
+    --color-primary: var(--color-primary);
+    --color-primary-foreground: var(--color-main);
+
+    --color-accent: var(--color-accent);
+    --color-accent-foreground: var(--color-accent-foreground);
+
+    --color-secondary: var(--color-secondary);
+    --color-secondary-foreground: var(--color-secondary-foreground);
+
+    --color-background: var(--color-background);
+    --color-background-foreground: var(--color-background-foreground);
+
+    --color-card: var(--color-card);
+    --color-card-foreground: var(--color-card-foreground);
+
+    --color-input: var(--color-input);
+    --color-input-foreground: var(--color-input-foreground);
+
+    --color-border: var(--color-border);
+
+    --color-muted: var(--color-muted);
+    --color-muted-foreground: var(--color-muted-foreground);
+
+    --color-skeleton: var(--color-skeleton)
+}
+
+
 :root{
 
-    --color-accent-1 : rgb(255, 152, 43);
+    --color-primary : rgb(255, 152, 43);
+    --color-primary-foreground : rgb(255, 152, 43);
     --color-subtle-light : rgba(104, 104, 104, 0.499);
     --color-subtle-light-hard : rgb(170, 170, 170);
     --color-light-emphasis : rgb(229, 229, 229);
 
     --color-skeleton-start : rgba(213, 213, 213, 0.395);
     --color-skeleton-end : rgba(206, 206, 206, 0.84);
+
+
+
 }
 
 ::selection {

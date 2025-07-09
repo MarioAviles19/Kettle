@@ -66,7 +66,6 @@
             target.style.height = target.scrollHeight + 'px';
         }
     }
-
 </script>
 
 {#if ingredients?.length == 0}

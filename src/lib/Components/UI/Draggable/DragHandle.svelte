@@ -9,7 +9,7 @@
     let { children }: Props = $props();
 
     onMount(()=>{
-        console.log(getContext(handleKey))
+
 
     })
     const HandleDragEnter = getContext<any>(handleKey)?.HandleDragEnter

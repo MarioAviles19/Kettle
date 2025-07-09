@@ -84,9 +84,9 @@
     function PrintRecipe(){
         window.print();
     }
-    function ReloadRecipe(){
+    function ReloadRecipe(opts? : {useCache? : boolean}){
         RecipeCache.update(el=>{
-            if(recipeID){
+            if(recipeID && !opts?.useCache){
                 delete el[recipeID]
             }
             return el
@@ -107,7 +107,7 @@
 
 {:else}
     {#if !editMode}
-    <div class="max-w-clamp-sm m-auto bg-white rounded-lg p-4 shadow-md print:shadow-none">
+    <div class="max-w-clamp-sm m-auto bg-white rounded-lg p-4 shadow-md print:shadow-none mb-[5rem] sm:mb-0">
         
         <div class="mb-4">
             <div class="flex justify-between">
@@ -115,10 +115,10 @@
                 <PopOver.Root class="print:hidden">
                     <PopOver.Open class="hover:bg-light-emphasis transition-all rounded-full"><EllipsisVertical/></PopOver.Open>
                     <PopOver.Content class="bg-white shadow-border rounded-md p-1 text-nowrap min-w-[10rem]">
-                        <button onclick={ToggleEditMode} class="transition-all px-1 w-full flex justify-start items-center gap-4 my-2 hover:bg-light-emphasis font-bold"><SquarePen size={20}/> <span>Edit</span></button>
-                        <button onclick={PrintRecipe} class="transition-all px-1 w-full flex justify-start items-center gap-4 my-2 hover:bg-light-emphasis font-bold"><Printer size={20}/> <span>Print</span></button>
-                        <button onclick={OpenShareMenu} class="transition-all px-1 w-full flex justify-start items-center gap-4 my-2 hover:bg-light-emphasis font-bold"><Share2 size={20}/> <span>Share</span></button>
-                        <button onclick={OpenConfirmation} class="transition-all px-1 w-full flex justify-start items-center gap-4 hover:bg-light-emphasis font-bold text-red-900"><SquareX size={20}/> <span>Delete</span></button>
+                        <button onclick={ToggleEditMode} class="transition-all px-1 py-2 w-full flex justify-start items-center gap-4 my-2 hover:bg-light-emphasis font-bold"><SquarePen size={20}/> <span>Edit</span></button>
+                        <button onclick={PrintRecipe} class="transition-all px-1 py-2 w-full flex justify-start items-center gap-4 my-2 hover:bg-light-emphasis font-bold"><Printer size={20}/> <span>Print</span></button>
+                        <button onclick={OpenShareMenu} class="transition-all px-1 py-2 w-full flex justify-start items-center gap-4 my-2 hover:bg-light-emphasis font-bold"><Share2 size={20}/> <span>Share</span></button>
+                        <button onclick={OpenConfirmation} class="transition-all px-1 py-2 w-full flex justify-start items-center gap-4 hover:bg-light-emphasis font-bold text-red-900"><SquareX size={20}/> <span>Delete</span></button>
                     </PopOver.Content>
                 </PopOver.Root>
 
@@ -185,7 +185,7 @@
         notes={recipe.notes}
         procedure={recipe.procedure}
         onsubmit={()=>{console.log("edit")}}
-        oncancel={()=>{window.location.reload()}}
+        oncancel={()=>{editMode = false; ReloadRecipe({useCache : true})}}
         />
     {/if}
 {/if}

@@ -65,7 +65,7 @@
     </a>
     {/each}
     {#if data.length == 0}
-        <div class="flex items-center flex-col justify-center p-[10rem] text-subtle-light-hard">
+        <div class="flex items-center flex-col justify-center p-40 text-subtle-light-hard">
             <div class="rounded-full bg-light-emphasis p-4">
                 <Drumstick size={70}/>
             </div>
@@ -91,7 +91,7 @@
         {/each}
     </div>
     {#if data.length == 0}
-    <div class="flex items-center flex-col justify-center p-[10rem] text-subtle-light-hard">
+    <div class="flex items-center flex-col justify-center p-40 text-subtle-light-hard">
         <div class="rounded-full bg-light-emphasis p-4">
             <Drumstick size={70}/>
         </div>

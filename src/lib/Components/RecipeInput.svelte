@@ -61,11 +61,11 @@
 
 </script>
 
-<form onsubmit={onsubmit} class="w-full max-w-clamp-sm m-auto mb-[10rem]">
+<form onsubmit={onsubmit} class="w-full max-w-clamp-sm m-auto mb-40">
   
 
     
-        <div id="detail" class="composeStep my-4  p-2 min-h-[25rem] mb-2 rounded-md shadow-md bg-white">
+        <div id="detail" class="composeStep my-4  p-2 min-h-100 mb-2 rounded-md shadow-md bg-white">
             <Sticky class="max-w-clamp-sm m-auto mt-4 p-2">
                 <div class="flex justify-end items-center gap-2">
                     <button onclick={oncancel} type="button" class="bg-white shadow-md text-accent-1 text-xl rounded-md px-2 py-1 block font-bold">Cancel</button>
@@ -82,7 +82,7 @@
             </div>
 
         </div>
-        <div id="ingredients" class="composeStep my-4  p-2 min-h-[25rem] mb-2 rounded-md shadow-md bg-white">
+        <div id="ingredients" class="composeStep my-4  p-2 min-h-100 mb-2 rounded-md shadow-md bg-white">
 
 
             <div class="my-4">
@@ -93,7 +93,7 @@
             </div>
         </div>
 
-        <div id="procedure" class="composeStep my-4  p-2 min-h-[9rem] mb-2 rounded-md shadow-md bg-white">
+        <div id="procedure" class="composeStep my-4  p-2 min-h-36 mb-2 rounded-md shadow-md bg-white">
 
 
             <div>
@@ -106,12 +106,12 @@
 
     </form>
 <div class="fixed bottom-8 w-full">
-    <div class="flex justify-around items-center px-[2rem] w-[90%] min-w-[16rem] max-w-[30rem]  m-auto">
-        <a href="#detail"  class="mx-[2px] block p-3 transition-all duration-300 rounded-full outline outline-2 outline-accent-1  {name? "bg-accent-1 text-white" : "bg-white text-accent-1"}" type="button"><Text size={30}/></a>
+    <div class="flex justify-around items-center px-8 w-[90%] min-w-[16rem] max-w-120  m-auto">
+        <a href="#detail"  class="mx-[2px] block p-3 transition-all duration-300 rounded-full outline-solid outline-2 outline-accent-1  {name? "bg-accent-1 text-white" : "bg-white text-accent-1"}" type="button"><Text size={30}/></a>
         <div aria-hidden="true" class="h-1 transition-all duration-300 w-full grow {ingredients[0]? "bg-accent-1" : "bg-[#d1d1d1]"}"></div>
-        <a href="#ingredients" class=" mx-[2px] block p-3 transition-all duration-300 rounded-full outline outline-2 outline-accent-1  {ingredients[0]? "bg-accent-1 text-white" : "bg-white text-accent-1"}" type="button"><Carrot size={30}/></a>
+        <a href="#ingredients" class=" mx-[2px] block p-3 transition-all duration-300 rounded-full outline-solid outline-2 outline-accent-1  {ingredients[0]? "bg-accent-1 text-white" : "bg-white text-accent-1"}" type="button"><Carrot size={30}/></a>
         <div aria-hidden="true" class="h-1 w-full transition-all duration-300 grow {procedure[0]? "bg-accent-1" : "bg-[#d1d1d1]"}"></div>
-        <a href="#procedure" class="mx-[2px] block p-3 transition-all duration-300 rounded-full outline outline-2 outline-accent-1 {procedure[0]? "bg-accent-1 text-white" : "bg-white text-accent-1"}" type="button"><CookingPot size={30}/></a>
+        <a href="#procedure" class="mx-[2px] block p-3 transition-all duration-300 rounded-full outline-solid outline-2 outline-accent-1 {procedure[0]? "bg-accent-1 text-white" : "bg-white text-accent-1"}" type="button"><CookingPot size={30}/></a>
     </div>
 </div>
 

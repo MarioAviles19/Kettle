@@ -96,7 +96,7 @@
     let recipeData = $state(GetRecipe(recipeID || ""));
 </script>
 
-<a href="/Dashboard" class="max-w-[50rem] m-auto my-2 font-bold flex justify-start items-center print:hidden"><ChevronLeft size={30}/>Dashboard</a>
+<a href="/Dashboard" class="max-w-200 m-auto my-2 font-bold flex justify-start items-center print:hidden"><ChevronLeft size={30}/>Dashboard</a>
 {#await recipeData}
     loading...
 {:then recipe} 
@@ -107,14 +107,14 @@
 
 {:else}
     {#if !editMode}
-    <div class="max-w-clamp-sm m-auto bg-white rounded-lg p-4 shadow-md print:shadow-none mb-[5rem] sm:mb-0">
+    <div class="max-w-clamp-sm m-auto bg-white rounded-lg p-4 shadow-md print:shadow-none mb-20 sm:mb-0">
         
         <div class="mb-4">
             <div class="flex justify-between">
                 <h2 class="sm:text-2xl text-xl font-bold">{recipe.name}</h2>
                 <PopOver.Root class="print:hidden">
                     <PopOver.Open class="hover:bg-light-emphasis transition-all rounded-full"><EllipsisVertical/></PopOver.Open>
-                    <PopOver.Content class="bg-white shadow-border rounded-md p-1 text-nowrap min-w-[10rem]">
+                    <PopOver.Content class="bg-white shadow-border rounded-md p-1 text-nowrap min-w-40">
                         <button onclick={ToggleEditMode} class="transition-all px-1 py-2 w-full flex justify-start items-center gap-4 my-2 hover:bg-light-emphasis font-bold"><SquarePen size={20}/> <span>Edit</span></button>
                         <button onclick={PrintRecipe} class="transition-all px-1 py-2 w-full flex justify-start items-center gap-4 my-2 hover:bg-light-emphasis font-bold"><Printer size={20}/> <span>Print</span></button>
                         <button onclick={OpenShareMenu} class="transition-all px-1 py-2 w-full flex justify-start items-center gap-4 my-2 hover:bg-light-emphasis font-bold"><Share2 size={20}/> <span>Share</span></button>
@@ -156,7 +156,7 @@
             <ol class="my-4 sm:text-base text-sm sm:px-5 sm:my-2">
         
                 <li class="my-3">
-                    <span class="rounded-full inline-flex justify-center items-center h-[2rem] w-[2rem] text-white bg-accent-1  border-accent-1  border-2 text-2xl mr-2">
+                    <span class="rounded-full inline-flex justify-center items-center h-8 w-8 text-white bg-accent-1  border-accent-1  border-2 text-2xl mr-2">
                         <span class="block text-lg font-semibold">{i + 1}</span>
                     </span>
                     <span class="font-semibold">{step}</span>
@@ -173,7 +173,7 @@
     </div>
 
     <Modal.Root bind:open={shareMenuOpen} class="backdrop-brightness-75">
-        <div class="max-w-[40rem] w-full">
+        <div class="max-w-160 w-full">
             <ManageAccess onsubmit={ReloadRecipe} recipe={{...recipe, id : recipeID ?? ""}}/>
         </div>
     </Modal.Root>

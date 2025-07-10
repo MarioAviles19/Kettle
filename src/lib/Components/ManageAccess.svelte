@@ -100,7 +100,7 @@
         </div>
         {#snippet UserCard(user : UserDoc, permission : string)}
             <div class="flex justify-start items-center gap-4 hover:bg-light-emphasis py-2 px-1">
-                <div class="rounded-full flex justify-center shrink-0 bg-light-emphasis items-center overflow-hidden w-[2.5rem] h-[2.5rem] sm:w-[4rem] sm:h-[4rem]">
+                <div class="rounded-full flex justify-center shrink-0 bg-light-emphasis items-center overflow-hidden w-10 h-10 sm:w-16 sm:h-16">
                     {#if user.photoURL}
                         <img referrerPolicy="no-referrer" src={user.photoURL} alt="Profile">
                     {:else}

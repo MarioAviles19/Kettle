@@ -48,7 +48,7 @@
 </script>
 
 
-<ul class="m-auto w-full max-w-[50rem]">
+<ul class="m-auto w-full max-w-200">
     <Draggable.Area bind:each={steps}>
         {#each steps as step, i}
     
@@ -62,7 +62,7 @@
                         </Draggable.RemoveButton>
               
                 </div>
-                <textarea rows="4" oninput={ResizeToFit} onfocusin={()=>{SetFocusState(i)}} onfocusout={()=>{}} bind:this={stepInputElements[i]} placeholder="Enter info..." class="resize-none border-2 p-1 border-black rounded w-full" bind:value={steps[i]}></textarea>
+                <textarea rows="4" oninput={ResizeToFit} onfocusin={()=>{SetFocusState(i)}} onfocusout={()=>{}} bind:this={stepInputElements[i]} placeholder="Enter info..." class="resize-none border-2 p-1 border-black rounded-sm w-full" bind:value={steps[i]}></textarea>
             </li>
         </Draggable.Item>
         {/each}

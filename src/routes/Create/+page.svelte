@@ -57,7 +57,7 @@
       } | undefined = $derived({name, description, procedure, ingredients, notes})
 
 </script>
-<a href="/Dashboard" class="max-w-[50rem] m-auto my-2 font-bold flex justify-start items-center print:hidden"><ChevronLeft size={30}/>Dashboard</a>
+<a href="/Dashboard" class="max-w-200 m-auto my-2 font-bold flex justify-start items-center print:hidden"><ChevronLeft size={30}/>Dashboard</a>
 
 <RecipeInput onsubmit={UploadRecipe} bind:name bind:description bind:notes bind:procedure bind:ingredients bind:image/>
 

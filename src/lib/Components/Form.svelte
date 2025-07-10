@@ -10,9 +10,9 @@
 
 </script>
 
-<form onsubmit={onsubmit} class="w-full max-w-[40rem] m-auto mb-[10rem]">
+<form onsubmit={onsubmit} class="w-full max-w-160 m-auto mb-40">
 
-        <div id="procedure" class="composeStep my-4  p-2 min-h-[9rem] mb-2 rounded-md shadow-md bg-white">
+        <div id="procedure" class="composeStep my-4  p-2 min-h-36 mb-2 rounded-md shadow-md bg-white">
 
 
             <div>

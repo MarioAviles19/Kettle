@@ -1,46 +1,81 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-@theme{
+@config '../tailwind.config.js';
 
-    --color-primary: var(--color-primary);
-    --color-primary-foreground: var(--color-main);
+@theme {
+  --color-primary: var(--color-primary);
+  --color-primary-foreground: var(--color-main);
 
-    --color-accent: var(--color-accent);
-    --color-accent-foreground: var(--color-accent-foreground);
+  --color-accent: var(--color-accent);
+  --color-accent-foreground: var(--color-accent-foreground);
 
-    --color-secondary: var(--color-secondary);
-    --color-secondary-foreground: var(--color-secondary-foreground);
+  --color-secondary: var(--color-secondary);
+  --color-secondary-foreground: var(--color-secondary-foreground);
 
-    --color-background: var(--color-background);
-    --color-background-foreground: var(--color-background-foreground);
+  --color-background: var(--color-background);
+  --color-background-foreground: var(--color-background-foreground);
 
-    --color-card: var(--color-card);
-    --color-card-foreground: var(--color-card-foreground);
+  --color-card: var(--color-card);
+  --color-card-foreground: var(--color-card-foreground);
 
-    --color-input: var(--color-input);
-    --color-input-foreground: var(--color-input-foreground);
+  --color-input: var(--color-input);
+  --color-input-foreground: var(--color-input-foreground);
 
-    --color-border: var(--color-border);
+  --color-border: var(--color-border);
 
-    --color-muted: var(--color-muted);
-    --color-muted-foreground: var(--color-muted-foreground);
+  --color-muted: var(--color-muted);
+  --color-muted-foreground: var(--color-muted-foreground);
 
-    --color-skeleton: var(--color-skeleton)
+  --color-skeleton: var(--color-skeleton);
 }
 
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
 
 :root{
+    --color-soft-black: rgb(33, 33, 33);
 
-    --color-primary : rgb(255, 152, 43);
-    --color-primary-foreground : rgb(255, 152, 43);
     --color-subtle-light : rgba(104, 104, 104, 0.499);
     --color-subtle-light-hard : rgb(170, 170, 170);
     --color-light-emphasis : rgb(229, 229, 229);
 
     --color-skeleton-start : rgba(213, 213, 213, 0.395);
     --color-skeleton-end : rgba(206, 206, 206, 0.84);
+
+    --color-background: rgb(255, 255, 255);
+    --color-background-foreground: var(--color-soft-black);
+
+    --color-muted: rgb(212, 212, 212);
+    --color-muted-foreground: rgb(79, 79, 79);
+
+    --color-primary: rgb(255, 152, 43);
+    --color-primary-foreground: white;
+
+    --color-secondary: #67a6b9;
+    --color-secondary-foreground: rgb(47, 47, 47);
+
+    --color-accent: #548ca4;
+    --color-accent-foreground: white;
+
+    --color-card: white;
+    --color-card-foreground: var(--color-soft-black);
+
+    --color-border: var(--color-soft-black);
 
 
 

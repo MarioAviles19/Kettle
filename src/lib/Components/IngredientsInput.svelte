@@ -69,7 +69,7 @@
 </script>
 
 {#if ingredients?.length == 0}
-<button onclick={AddIngredient} type="button" class="group min-h-[25rem] flex flex-col justify-center items-center w-full bg-[#ecececc5] rounded-xl p-9">
+<button onclick={AddIngredient} type="button" class="group min-h-100 flex flex-col justify-center items-center w-full bg-[#ecececc5] rounded-xl p-9">
     <span aria-hidden="true" class="group-active:text-accent-1 group-active:bg-[#ffc277] transition-colors text-[#bbbbbb] duration-75 block m-auto bg-[#e4e4e4] rounded-full p-[.5rem] w-fit">
         <Cross size={70}/>
     </span>
@@ -78,7 +78,7 @@
 
 {:else}
 
-<div class="min-h-[10rem]">
+<div class="min-h-40">
     <ul class="list-disc pl-4">
         <Draggable.Area bind:each={ingredients}>
             {#each ingredients as ingredient, i}

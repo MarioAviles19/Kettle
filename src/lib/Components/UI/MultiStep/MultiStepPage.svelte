@@ -24,7 +24,7 @@
 
     
         {#if $activePage == index}
-            <div class="row-[1] col-[1] w-full h-full" in:fly={{x: 100 * $transitionDirection, delay : 200, duration : 200, }} out:fly={{x: -100 * $transitionDirection, duration : 200}}>
+            <div class="row-1 col-1 w-full h-full" in:fly={{x: 100 * $transitionDirection, delay : 200, duration : 200, }} out:fly={{x: -100 * $transitionDirection, duration : 200}}>
                 {@render children?.()}
             </div>
         {/if}

@@ -24,8 +24,8 @@
     let { children }: Props = $props();
 </script>
 
-<header class="flex justify-between items-center p-2">
-    <h1 class="font-bold text-xl text-accent-1">Kettle</h1>
+<header class="flex justify-between items-center p-2 bg-card shadow py-4">
+    <h1 class="font-bold text-xl text-primary">Kettle</h1>
     <nav class="print:hidden">
         <ul class="flex gap-4">
             <li>

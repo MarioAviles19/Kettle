@@ -44,7 +44,7 @@
     <div {...rest}  onpointerup={PointerUp} onpointerenter={PointerEnter} onpointerleave={PointerLeave} role="listitem">
         
         {#if draggingOver}
-        <div class="w-full rounded-md border-accent-1 border-dotted border-4 min-h-[1rem]" style="height : {$activeItem?.height | 0}px">
+        <div class="w-full rounded-md border-accent-1 border-dotted border-4 min-h-4" style="height : {$activeItem?.height | 0}px">
             
         </div>
         {/if}

@@ -38,7 +38,7 @@
 <div class="composeStep p-1">
     <div class="my-2">   
         <h3 class="text-xl font-bold">Name</h3>
-        <input  type="text" class="border-black border-2 rounded w-full p-1" bind:value={name}/>
+        <input  type="text" class="border-black border-2 rounded-sm w-full p-1" bind:value={name}/>
     </div>
     
     <div class="my-2 hidden">
@@ -47,7 +47,7 @@
             <ImageUpload.Input class="block">
                 <ImageUpload.Preview/>
                 {#if !$image}
-                    <div class=" min-h-[10rem] text-subtle-light flex items-center justify-center border-4 border-dashed border-subtle-light rounded-lg">
+                    <div class=" min-h-40 text-subtle-light flex items-center justify-center border-4 border-dashed border-subtle-light rounded-lg">
                         <Camera size={40}/>
                     </div>
                 {/if}
@@ -60,7 +60,7 @@
 
     <div class="my-2">   
         <h3 class="text-xl font-bold">Description</h3>
-        <textarea oninput={ResizeToFit} bind:value={description} use:ResizeToFitInput class="border-2 border-black rounded w-full min-h-[5rem] p-1"></textarea>
+        <textarea oninput={ResizeToFit} bind:value={description} use:ResizeToFitInput class="border-2 border-black rounded-sm w-full min-h-20 p-1"></textarea>
     </div>
 
 
@@ -68,7 +68,7 @@
 
     <h3 class="font-bold text-xl">Notes</h3>
 
-    <textarea oninput={ResizeToFit} bind:value={notes} placeholder="Enter note..." class="border-2 border-black rounded w-full min-h-[5rem] p-1"></textarea>
+    <textarea oninput={ResizeToFit} bind:value={notes} placeholder="Enter note..." class="border-2 border-black rounded-sm w-full min-h-20 p-1"></textarea>
 
 
 </div>

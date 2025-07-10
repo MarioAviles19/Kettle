@@ -44,20 +44,20 @@
             <li>
                 <button type="button" class="flex flex-col items-center">
                     <Apple class="transition-all duration-300 {currentPage >= 0? "text-accent-1" : "text-[#6a6a6a66]"}"/>
-                    <div class="w-[2.5rem] h-1 slider {currentPage >= 0? "filled" : ""} skew-x-[20deg]"></div>
+                    <div class="w-10 h-1 slider {currentPage >= 0? "filled" : ""} skew-x-20"></div>
                 </button>
             </li>
             <li>
                 <button type="button" class="flex flex-col items-center">
                     <CookingPot class="transition-all duration-300 {currentPage >= 1? "text-accent-1" : "text-[#6a6a6a66]"}"/>
-                    <div class="w-[2.5rem] slider {currentPage >= 1? "filled" : ""} h-1 skew-x-[20deg]"></div>
+                    <div class="w-10 slider {currentPage >= 1? "filled" : ""} h-1 skew-x-20"></div>
                 </button>
             </li>
             <li>
 
                 <button type="button" class="flex flex-col items-center ">
                     <Text class="transition-all duration-300 {currentPage >= 2? "text-accent-1" : "text-[#6a6a6a66]"}"/>
-                <div class="w-[2.5rem] slider {currentPage >= 2? "filled" : ""} h-1 skew-x-[20deg]"></div>
+                <div class="w-10 slider {currentPage >= 2? "filled" : ""} h-1 skew-x-20"></div>
                     
             </li>
             <li>
@@ -69,7 +69,7 @@
     <MultiStep.Pages>
         <MultiStep.Page>
 
-            <div class="composeStep p-1 min-h-[5rem]">
+            <div class="composeStep p-1 min-h-20">
                 
                 <h3 class="text-xl font-bold">Ingredients</h3>
 

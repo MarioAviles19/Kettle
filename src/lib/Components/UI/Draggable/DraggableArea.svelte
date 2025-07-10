@@ -112,7 +112,7 @@
 
     {@render children?.()}
 
-    <DraggableItemBuffer class="min-h-[1.25rem]" />
+    <DraggableItemBuffer class="min-h-5" />
 
     {#if $activeItem}
         <div class="itemcontainer bg-white absolute w-full pointer-events-none border-2 min-h-4 min-w-8 border-black rounded-md font-bold px-2 z-50" style="top:{(mouseY - (window?.scrollY ?? 0)) - $activeItem.offset.y}px; left:{mouseX - $activeItem.offset.x}px">

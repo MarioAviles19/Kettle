@@ -6,6 +6,7 @@
     import { fireAuth } from "$lib/Firebase";
 	import { authState } from '$lib/stores';
 	import type { FormEventHandler } from 'svelte/elements';
+	import { goto } from '$app/navigation';
     let { ...rest } = $props();
 
 
@@ -26,11 +27,11 @@
         signOut(fireAuth)
     }
 
-    async function LoginWithEmailAndPassword(e : InputEvent){
+    async function LoginWithEmailAndPassword(e : any){
         e.preventDefault()
         try{
             const res = await signInWithEmailAndPassword(fireAuth, email, password)
-            console.log($authState)
+            goto('/Dashboard');
         } catch(e){
             console.log(e)
         }
@@ -66,11 +67,11 @@
         <input required class="w-full" id="password" bind:value={password} type="password">
 
         <div class="my-1">
-            <a class="block text-center font-semibold text-accent-1" href="/Create">Create Account</a>
-            <a class="block text-center font-semibold text-accent-1" href="/ForgotPassword">Forgot Password?</a>
+            <a class="block text-center font-semibold text-primary" href="/Create">Create Account</a>
+            <a class="block text-center font-semibold text-primary" href="/ForgotPassword">Forgot Password?</a>
         </div>
     
-        <button class=" block w-fit rounded-md bg-accent-1 m-auto text-white px-2 py-1 text-lg font-bold my-3" type="submit">Sign In</button>
+        <button class="block w-fit rounded-md bg-primary m-auto text-white px-2 py-1 text-lg font-bold my-3" type="submit">Sign In</button>
     </form>
     
 
